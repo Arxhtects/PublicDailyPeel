@@ -1,0 +1,62 @@
+extends ../partials/layout
+
+block content
+
+    main
+        section#login-head.row.padded 
+            div.flex-grid-wrapper.two-order
+                div.top-item(data-type-order="1")
+                    i.login-icon
+                    h1 Log in to Your Account. 
+                    p Sign-in with your banano wallet. Jump in to the discussion with your fellow monkeys! Read, comment and tip easily.
+                    a.btn(href="./faqs", data-flow="help-message", aria-label="How to sign in") Need a little help?
+                    a.underline-animation(href="./privacy-policy", aria-label="Privacy Policy") The Important Bits
+                    hr
+
+                div.form-wrapper#form-wrapper(data-type-order="2")
+                    form#login(action="/login", method="post", data-flow="Log in form")
+                        div
+                            p Sign the following: 
+                                span#target-sig-to-sign 
+                                    input#copy-text-target(type="text" value=`${authString}`, readonly) 
+                                    span.copy-toggle-target
+                                a.underline-animation(href=`${authUrl}`, aria-label="banano stand link", target="_blank", rel="nofollow, noindex, noreferrer") Sign message with Bananostand
+                    
+                        div.sig-input.form-items
+                            label(for="sig") Signature 
+                            input#sig(name="sig", placeholder="52F56AC43E4FC256...", aria-label="signature response", type="text")
+                            a.underline-animation.question(href="#", aria-label="help popup link", rel="nofollow, noindex, noreferrer", data-flow="popuphelp")
+                                    span ?
+                                    span Not sure how to sign a message. 
+
+                        div.input.form-items
+                            label(for="banaddress", aria-label="banano address") Address 
+                            input#banaddress(name="banaddress", placeholder="ban_...", aria-label="banano address input", type="text")
+
+                        div.input.form-items
+                            label(for="user") Username 
+                            input#user(name="user", aria-label="username input", type="text")
+
+                        div.input.form-items.password-type
+                            label(for="pin") Password 
+                            input#pin(name="pin", aria-label="signature response", type="password", data-flow="password-toggle")
+                            input.reveal(type="checkbox", aria-label="reveal-password", data-flow="show password")
+
+                        div.flex-row
+                            button.btn#submititem(data-flow="sign-in", aria-label="Sign in to daily peel") Sign in to daily peel
+                            a.underline-animation(href="./forgot-passowrd", aria-label="password reset", data-flow="") Forgot Pin
+
+                div.bottom-item(data-type-order="3")
+                    wrapper#carousel-wrapper 
+                        article.review
+                            i.quote 
+                            blockquote The most fun you can legally have on the internet. I didn't even get paid to say that. Seriously. Still not paid me.
+                            .user 
+                                figure.user-wrapper 
+
+                                div.name
+                                    strong Bananochan 
+                                    span Cute anime girl
+
+    footer
+        include ../partials/footer

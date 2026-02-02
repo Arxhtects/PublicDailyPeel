@@ -1,0 +1,57 @@
+header#header-main
+    section#main-wrapper
+        section#menu-wrapper-start
+            label(for='toggle-menu', data-flow="menu-toggle", aria-label="Show Menu")
+                input#toggle-menu(type='checkbox', aria-label="menu check box")
+                span
+                span
+                span
+            figure
+                span D
+                    span.ultrasmall aily 
+                span P
+                    span.ultrasmall eel
+            section#header-item-wrapper
+                div.input-wrapper
+                    input#search-input-item(type="text", data-flow="search-posts", aria-label="input text for searching", placeholder="What do you want to read?")
+                    button#search-peel(data-flow="ajax-search-true", data-is-easy-read="true", aria-label="search posts")
+                div.search-dropdown-wrapper(data-flow="ajax-result-list", data-is-easy-read="true")
+
+        section#menu-wrapper-end 
+            div#search-target(aria-label="search", data-flow="search-target")
+            if(typeof(username) == 'undefined' || typeof(username) == "")
+                a.underline-animation(href="/sign-up", data-flow="sign-up-message", aria-label="Sign Up")
+                    span Sign Up
+                a(href="/login", data-flow="login-message-sign", data-has-message-sign="true", aria-label="log in with banstand")
+                    span Log in
+            else 
+                a.notificationbell(href="/users/notifications", date-flow="notifications", data-user=`${username[0]}`, data-notifcation-count="0", aria-label="Notifications")
+                    div.bell-top 
+                    div.bell-bot
+                    span.notificationdot
+                section#profileHeadWrapper
+                    a.userdisplay(data-flow="profile", data-user=`${username[0]}`)
+                        if(typeof(username[2]) == 'true')
+                            img(src=`${username[3]}`, data-flow="profile picture", data-user=`${username[0]}`, alt=`${username[0]}`)
+                        else 
+                            span.gradientDefault(style=`background: ${username[3]}`, data-flow="Default Profile")
+
+                    div.profilemenu(data-flow="dropdown menu", data-user=`${username[0]}`)
+                        ul
+                            li.write-icon
+                                a.underline-animation(href="/posts/create", data-notifcation-count="0", aria-label="Settings")
+                                    span.write Write 
+                            li.hiddendesktop.notifcation-icon
+                                a.underline-animation(href="/users/notifications", data-notifcation-count="0",  aria-label="Notifications")
+                                    span.notifications Notifications
+                            li.dashboard-icon
+                                a.underline-animation(href="/dashboard", data-notifcation-count="0", aria-label="Dashboard")
+                                    span.dashboard Dashboard
+                            li.profile-icon
+                                a.underline-animation(href="/users/profile", data-notifcation-count="0", aria-label="Profile")
+                                    span.profile Profile  
+                            hr
+
+                            li.logout-icon
+                                a.underline-animation(href="/logout", data-notifcation-count="0", aria-label="Log out")
+                                    span.logout Log out 

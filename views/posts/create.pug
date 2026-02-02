@@ -1,0 +1,23 @@
+extends ../partials/editlayout
+
+block content
+
+    main 
+        header#toolbar-wrapper.row
+            div.inner-toolbar-section
+                include tools/toolbar
+            
+            include tools/add
+        
+        section#editable-block.row(data-flow="is-writeable")
+            section.row.padded.post-heading
+                p#category-tag(data-flow="is-editable", data-meta="ajax-updateable", data-allows-editor="false") 
+                    span(contenteditable="false", data-is-name="category") Category
+                h1#post-heading-title(data-flow="is-editable", data-meta="ajax-username-updateable", data-allows-editor="false") 
+                    span(contenteditable="false", data-is-name="post-title") In Monkiopolis, unity thrived, bound by the golden fruit of happiness.
+                figure
+                    img#post-thumb-nail(src="/images/png/placeholder.jpg")
+            section.row.padded.taggable.sortable-items.droptrue
+
+    footer
+        include ../partials/footer

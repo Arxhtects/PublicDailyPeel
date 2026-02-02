@@ -1,0 +1,159 @@
+footer {
+    position: relative;
+    section[data-flow="paralax-scroll-animation-notifier"] {
+        display: none;
+        @media only screen and (min-width: $mobile-smaller) {
+            position: fixed;  
+            display: block;
+            width: 100%;
+            position: relative;
+            background: transparent;
+            z-index: 2;
+            pointer-events: none;
+        }
+    }
+    p.footerhead {
+        font-family: $headerFont;
+        font-size: 1.3em;
+        margin-bottom: 30px;
+        color: $lightmodeFade;
+        @media (prefers-color-scheme: dark) {
+            color: $darkmodeFade;
+        }  
+    }
+    ul {
+        @media only screen and (min-width: $mobile-smaller) {
+            column-count: 2;
+        }
+        li {
+            position: relative;
+            list-style: none;
+            padding-left: 40px;
+            margin-bottom: 15px;
+            &:before {
+                content: '';
+                position: absolute;
+                top: 50%;  
+                left: 0;
+                transform: translateY(-50%);
+                height: 30px;
+                width: 30px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: 50%;
+                filter: brightness(0) invert(0);
+                @media (prefers-color-scheme: dark) {
+                    filter: brightness(0) invert(1);
+                }
+            }
+            &#discord {               
+                &:before {
+                    background-image: url("../images/svg/discord.svg");
+                }
+            }
+            &#reddit {               
+                &:before {
+                    background-image: url("../images/svg/reddit.svg");
+                }
+            }
+            &#xtwotter {               
+                &:before {
+                    background-image: url("../images/svg/x.svg");
+                }
+            }
+            &#youtube {               
+                &:before {
+                    background-image: url("../images/svg/youtube.svg");
+                }
+            }
+            &#medium {               
+                &:before {
+                    background-image: url("../images/svg/medium.svg");
+                }
+            }
+            &#telegram {               
+                &:before {
+                    background-image: url("../images/svg/telegram.svg");
+                }
+            }
+            &#instagram {               
+                &:before {
+                    background-image: url("../images/svg/instagram.svg");
+                }
+            }
+            &#facebook {               
+                &:before {
+                    background-image: url("../images/svg/facebook.svg");
+                }
+            }
+        }
+    }
+    aside#footer-reveal {
+        z-index: 0;
+        align-items: flex-end;
+        width: 100%;
+        padding: 200px;
+        display: flex;   
+        z-index: 1;   
+        bottom: 0;
+        background-color: $lightmodesearch;
+        @media only screen and (min-width: $mobile) {
+            position: fixed;  
+        }
+        @media (prefers-color-scheme: dark) {
+            background-color: $darkmodesearch;
+        }
+        padding: 60px 20px;
+        @media only screen and (min-width: $landscapeTablet) {
+            padding: 80px 50px;
+        }
+        #footer-scroll-target {
+            width: 100%;
+            will-change: transform, opacity;
+            transform-style: preserve-3d;
+            opacity: 1;
+        }
+        .three-col {       
+            @media only screen and (min-width: $mobile) {
+                padding-right: 40px;
+                &:last-child {
+                    padding-right: 0px;
+                }
+            }
+            @media only screen and (min-width: $desktop) {
+                padding-right: 80px;
+            }
+        }
+    }
+    #footerend {
+        padding-top: 30px;
+        p, a {
+            color: $lightmodeFade;
+            @media (prefers-color-scheme: dark) {
+                color: $darkmodeFade;
+            }    
+        }
+        a {
+            &:after {
+                background-image: linear-gradient(90deg, $lightmodeFade 50%, transparent 50%), linear-gradient(90deg, $lightmodeFade 50%, transparent 50%);
+                @media (prefers-color-scheme: dark) {
+                    background-image: linear-gradient(90deg, $darkmodeFade 50%, transparent 50%), linear-gradient(90deg, $darkmodeFade 50%, transparent 50%);
+                } 
+            }
+        }
+        span {
+            padding-right: 20px;
+            color: $lightmodeFade;
+            border-right: solid 1px $lightmodeFade;
+            @media (prefers-color-scheme: dark) {
+                border-right: solid 1px $darkmodeFade;
+                color: $darkmodeFade;
+            }
+            &:last-child {
+                padding-left: 20px;
+                padding-right: 0px;
+                border-right: 0px;
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="350" height="350" viewBox="0 0 350 350">
+  <defs>
+    <clipPath id="clip-Custom_Size_1">
+      <rect width="350" height="350"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
+    <g id="Rectangle_1" data-name="Rectangle 1" fill="none" stroke="#54ff00" stroke-linecap="round" stroke-width="25" stroke-dasharray="500 100">
+      <rect width="350" height="350" rx="49" stroke="none"/>
+      <rect x="12.5" y="12.5" width="325" height="325" rx="36.5" fill="none"/>
+    </g>
+    <path id="Path_1" data-name="Path 1" d="M62.591,242.307,126.6,167.059s2.532-4.986,3.376-4.395,1.706,4.395,1.706,4.395l16.679,72.064s.277,2.776,1.347,3.184,4.279-4.595,4.279-4.595l57.711-70.4" transform="translate(28.589 -21.157)" fill="none" stroke="#54ff00" stroke-linecap="round" stroke-width="25"/>
+    <path id="Path_2" data-name="Path 2" d="M276.232,161.086l-.856-47.893s.006-7.8-.144-8.085-7.781,0-7.781,0H216.258" transform="translate(-17.411 23.843)" fill="none" stroke="#54ff00" stroke-linecap="round" stroke-width="25"/>
+  </g>
+</svg>

@@ -1,0 +1,467 @@
+header {
+    position: sticky;
+    top: 0;
+    z-index: $alwaystop;
+}
+
+#main-wrapper {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    background: $lightBg;
+    @media (prefers-color-scheme: dark) {
+        background: $darkBg;
+    }
+    @media only screen and (min-width: $landscapeTablet) {
+        padding: 20px 50px;
+    }
+    #menu-wrapper-start {
+        display: flex;
+        flex-flow: row;
+        width: 100%;
+        max-width: 90px;
+        @media only screen and (min-width: $min-supported-size) {
+            max-width: 170px;
+        }
+        @media only screen and (min-width: $mobile-small) {
+            max-width: 200px;
+        }
+        @media only screen and (min-width: $mobile) {
+            margin-right: 30px;
+            max-width: 560px;
+        }
+        @media only screen and (min-width: $landscapeTablet) {
+            max-width: 760px;
+        }
+        label {
+            display:flex;
+            flex-direction:column;
+            width:70px;
+            position: absolute;
+            cursor:pointer;
+            width: 40px;
+            height: 40px;
+            left: 20px;
+            @media only screen and (min-width: $mobile) {
+                margin-top: 11px;
+            }
+            @media only screen and (min-width: $landscapeTablet) {
+                left: 50px;
+            }
+            span {                         
+                background-color: $lightmodeText;
+                @media (prefers-color-scheme: dark) {
+                    background-color: $darkmodeText;
+                }
+                border-radius:10px;
+                height: 4px;
+                margin: 10% 0;
+                transition: $cubicbezier;
+                &:nth-of-type(1){
+                    width:50%;
+                }
+                &:nth-of-type(2){
+                    width:100%;
+                }
+                &:nth-of-type(3){
+                    width:75%;
+                }
+            }
+            input[type="checkbox"]{
+                display:none;
+                &:checked ~ span:nth-of-type(1){
+                    transform-origin: bottom;
+                    transform: rotatez(45deg) translate(5px,0px)
+                }
+                &:checked ~ span:nth-of-type(2){
+                    transform-origin: top;
+                    transform: rotatez(-45deg)
+                }
+                &:checked ~ span:nth-of-type(3){
+                    transform-origin:bottom;
+                    width: 50%;
+                    transform: translate(18px, -6px) rotatez(45deg);
+                }
+            }
+        }
+        figure {
+            font-size: 1.5em;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            padding: 0px 0px 0px 60px; 
+            @media only screen and (min-width: $mobile) {
+                padding: 0px 30px 0px 60px; 
+            }
+            span {
+                font-family: $headerFont;
+                display: flex;
+                .ultrasmall {
+                    display: none;
+                    @media only screen and (min-width: $min-supported-size) {
+                        display: inline-block;
+                        &:first-child {
+                            padding-right: 10px;
+                        }
+                    }
+                }
+            }
+        }
+        #header-item-wrapper {
+            max-width: 0;
+            @media only screen and (min-width: $mobile) {
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                width: 100%;
+                max-width: 360px;
+            }
+            @media only screen and (min-width: $landscapeTablet) {
+                max-width: 560px;
+            }
+            .input-wrapper {
+                display: flex;
+                width: 100%;
+                padding: 10px;
+                bottom: 0;
+                position: absolute;
+                left: 0;
+                opacity: 1;
+                transition: $positiontransition;
+                pointer-events: none;
+                z-index: -1;
+                .search-target & {
+                    bottom: calc(-100% + 9px); 
+                    pointer-events: all;
+                }
+                background-color: $lightmodesearch;
+                @media (prefers-color-scheme: dark) {
+                    background-color: $darkmodesearch;
+                }
+                @media only screen and (min-width: $mobile) {
+                    z-index: 0;
+                    pointer-events: all;
+                    padding: 0px;
+                    position: relative;
+                    bottom: auto !important;
+                    left: auto;
+                    background-color: transparent;
+                    @media (prefers-color-scheme: dark) {
+                        background-color: transparent;
+                    }
+                }
+                input {
+                    width: 100%;
+                    font-size: 14px;
+                    border-radius: 50px;
+                    padding: 20px 80px 20px 20px;
+                    border: 0;
+                    font-family: $bodyFont;
+                    background-color: $lightmodesearch;
+                    @media (prefers-color-scheme: dark) {
+                        background-color: $darkmodesearch;
+                    }
+                    @media only screen and (min-width: $mobile) {
+                        padding: 20px 80px 20px 30px;
+                    }
+                }
+                button {
+                    &#search-peel {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        padding: 20px;
+                        border-radius: 50px;
+                        border: 0px;
+                        border-radius: 50px;
+                        background-color: $greenColor;
+                        color: $lightmodeText;
+                        right: 20px;
+                        &:after {
+                            content: '';
+                            position: absolute;
+                            top: 50%;  
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            height: 20px;
+                            width: 20px;
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-position: 50%;
+                            background-image: url("../images/svg/search.svg");
+                            filter: brightness(0) invert(0);                   
+                            @media only screen and (min-width: $mobile) {
+                                transition: $transition;
+                            }
+                        }
+                        @media only screen and (min-width: $mobile) {
+                            transition: $transition;
+                            right: 10px;
+                            &:hover {
+                                background-color: $lighthover;
+                                @media (prefers-color-scheme: dark) {
+                                    background-color: $darkhover;
+                                }
+                                &:after {
+                                    
+                                    filter: brightness(0) invert(1); 
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #menu-wrapper-end {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: flex-end;
+        div#search-target {
+            display: block;
+            height: 40px;
+            width: 40px;
+            margin-right: 20px;
+            border-radius: 50px;
+            border: 0px;
+            position: relative;
+            background-color: $lighthover;
+            @media (prefers-color-scheme: dark) {
+                background-color: $darkhover;
+            }
+            @media only screen and (min-width: $mobile) {
+                display: none;
+            }
+            &:after {
+                content: '';
+                position: absolute;
+                top: 50%;  
+                left: 50%;
+                transform: translate(-50%, -50%);
+                height: 18px;
+                width: 18px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: 50%;
+                background-image: url("../images/svg/search.svg");
+                filter: brightness(0) invert(0);
+                @media (prefers-color-scheme: dark) {
+                    filter: brightness(0) invert(1);
+                }
+            }
+        }
+        a {
+            font-size: 18px;
+            font-weight: 700;
+            &[data-flow="login-message-sign"] {
+                border-radius: 50px;
+                background-color: $greenColor;
+                color: $lightmodeText;
+                position: relative;
+                padding: 10px 20px 10px 20px;
+                @media only screen and (min-width: $mobile-smaller) {
+                    padding: 10px 30px 10px 60px;
+                }
+                @media only screen and (min-width: $mobile) {
+                    transition: $transition;
+                    &:hover {
+                        background-color: $lighthover;
+                        @media (prefers-color-scheme: dark) {
+                            background-color: $darkhover;
+                            color: white;
+                            &::before {
+                                filter: brightness(0) invert(1);  
+                            }
+                        }
+                    }
+                }
+                &:before {
+                    @media only screen and (min-width: $mobile-smaller) {
+                        content: '';
+                        position: absolute;
+                        top: 50%;
+                        left: 20px;
+                        transform: translateY(-50%);
+                        height: 28px;
+                        width: 28px;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: 50%;
+                        background-image: url("../images/svg/monkeythicker.svg");
+                        filter: brightness(0) invert(0);                   
+                        @media only screen and (min-width: $mobile) {
+                            transition: $transition;
+                        }
+                    }
+                }
+            }
+            &[data-flow="sign-up-message"] {  
+                display: none; 
+                @media only screen and (min-width: $mobile-small) {
+                    display: inline;
+                    margin-right: 25px;
+                    color: $lightmodeText;
+                    position: relative;
+                    @media (prefers-color-scheme: dark) {
+                        color: $darkmodeText;
+                    }
+                }
+            }
+        }   
+        .notificationbell {
+            position: relative;
+            height: 0;
+            width: 0;
+            @media only screen and (min-width: $min-supported-size) {
+                display: block;
+                height: 35px;
+                width: 35px;
+                margin-right: 20px;
+                background: $greenColor;
+                border-radius: 50px;
+                z-index: 9;  
+            }   
+            .bell-top {
+                width: 23px;
+                height: 23px;
+                background-image: url("../images/png/bell.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: 50%;
+                filter: brightness(0) invert(0);
+                margin: 0 auto;
+                margin-top: 5px;    
+                margin-right: 6px;
+                 
+            } 
+            .bell-bot {     
+                width: 23px;
+                height: 7px;
+                background-image: url("../images/png/clapper.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: 50%;
+                filter: brightness(0) invert(0);
+                left: -1px;
+                position: absolute;
+                transform: translateX(7px) rotate(0deg);
+                bottom: 5px;
+                margin-right: 7px;
+            }
+            .notificationdot {
+                position: absolute;
+                height: 12px;
+                width: 12px;
+                border-radius: 50px;
+                background-color: $error;
+                z-index: 10;    
+                top: -20px;
+                right: -50px;
+                @media only screen and (min-width: $min-supported-size) {
+                    top: -2px;
+                    right: -2px;
+                }
+            }
+        }
+        #profileHeadWrapper {
+            position: relative;
+            &:hover {
+                div.profilemenu {
+                    top: 0;
+                    pointer-events: all;
+                    opacity: 1;
+                }
+            }
+            div.profilemenu {
+                transition: $transition;
+                z-index: 1;
+                position: absolute;
+                top: -40px;
+                opacity: 0;
+                pointer-events: none;
+                right: 0;
+                width: 250px;
+                padding: 70px 0px 0px 0px;
+                ul {    
+                    list-style: none;
+                    padding: 30px;
+                    width: 100%;
+                    border-radius: 5px;
+                    display: flex;
+                    flex-flow: column;
+                    background: $lightmodesearch;
+                    @media (prefers-color-scheme: dark) {
+                        background: $darkmodesearch;
+                    }
+                    li {
+                        margin-bottom: 15px;
+                        padding-left: 40px;
+                        position: relative;
+                        &.hiddendesktop {
+                            display: block;
+                            @media only screen and (min-width: $min-supported-size) {
+                                display: none;
+                            }
+                        }           
+                        &:before {
+                            content: '';
+                            position: absolute;
+                            top: 50%;  
+                            left: -5px;
+                            transform: translateY(-50%);
+                            height: 20px;
+                            width: 20px;
+                            margin-top: 1px;
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-position: 50%;
+                            filter: brightness(0) invert(0);
+                            @media (prefers-color-scheme: dark) {
+                                filter: brightness(0) invert(1);
+                            }
+                        }
+                        &.write-icon {
+                            &:before {
+                                background-image: url("../images/svg/edit.svg");
+                            }
+                        }
+                        &.notifcation-icon {           
+                            &:before {
+                                background-image: url("../images/png/mobilnotification.png");
+                            }
+                        }
+                        &.dashboard-icon {           
+                            &:before {
+                                background-image: url("../images/png/dashboard.png");
+                            }
+                        }
+                        &.profile-icon {
+                            &:before {
+                                background-image: url("../images/png/account.png");
+                            }
+                        }
+                        &.logout-icon {
+                            &:before {
+                                background-image: url("../images/png/logout.png");
+                            }
+                        }
+                        a {
+                            font-weight: 400;
+                        }
+                    }
+                    hr {
+                        margin: 20px 0px;
+                        border: solid 1px $lightmodeHR;
+                        @media (prefers-color-scheme: dark) {
+                            border: solid 1px $darkmodeHR;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

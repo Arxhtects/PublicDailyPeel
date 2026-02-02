@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(name='color-scheme', content='dark light')
+    script(src='/javascripts/libs/jquery.js')
+    script(src='/javascripts/libs/jqueryUI.js')
+    script(src='/javascripts/script.js')
+    script(src='/javascripts/ajax.js')
+    script(src='/javascripts/edit.js')
+
+    link(rel='preconnect', href='https://fonts.googleapis.com')
+    link(rel='preconnect', href='https://fonts.gstatic.com', crossorigin='')
+    link(href='https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap', rel='stylesheet')
+    
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
+  body#body
+    if(typeof errormsg !="undefined")
+        p.toast.errormsg.active
+          span.toast-head Whoops! Error.
+          span.msg= errormsg
+          span.closebutton
+        
+    if(typeof successmsg !="undefined")
+        p.toast.successmsg.active
+          span.toast-head Ya-Hoo! Success.
+          span.msg= successmsg
+          span.closebutton
+          
+    if(typeof warningmsg !="undefined")
+        p.toast.warningmsg.active
+          span.toast-head Alert! Warning.
+          span.msg= warningmsg
+          span.closebutton
+    
+    if(typeof infomsg !="undefined")
+        p.toast.infomsg.active
+          span.toast-head Informaion.
+          span.msg= infomsg
+          span.closebutton
+
+    header#header-main
+      include menu
+      
+    block content
+      

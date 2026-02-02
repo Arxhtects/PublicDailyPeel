@@ -1,0 +1,27 @@
+{
+  "layout" : [
+    {
+      "defaultWrapperStart" : "<div data-flow='column-target-wrap' class='editableRowTargetSelector sortable-items-wrapper'>",
+      "defaultWrapperEnd" : "</div>",
+      "addFullWidth" : "<section class='row padded taggable sortable-items droptrue'  style='background-color: rgba(255, 255, 255, 0);'></section>",
+      "addTwoColumns" : "<section class='row padded col-container two-col-design' style='background-color: rgba(255, 255, 255, 0);'><div class='col taggable sortable-items droptrue'></div><div class='col taggable sortable-items droptrue'></div></section>",
+      "addThreeColumns" : "<section class='row padded col-container three-col-design' style='background-color: rgba(255, 255, 255, 0);'><div class='col taggable sortable-items droptrue'></div><div class='col taggable sortable-items droptrue'></div><div class='col taggable sortable-items droptrue'></div></section>",
+      "addFourColumns" : "<section class='row padded col-container four-col-design' style='background-color: rgba(255, 255, 255, 0);'><div class='col taggable sortable-items droptrue'></div><div class='col taggable sortable-items droptrue'></div><div class='col taggable sortable-items droptrue'></div><div class='col taggable sortable-items droptrue'></div></section>",
+      "addOneThirdColumns" : "<section class='row padded col-container one-third-col-design' style='background-color: rgba(255, 255, 255, 0);'><div class='col taggable sortable-items droptrue'></div><div class='col taggable sortable-items droptrue'></div></section>",
+      "addTwoThirdsColumns" : "<section class='row padded col-container two-thirds-col-design' style='background-color: rgba(255, 255, 255, 0);'><div class='col taggable sortable-items droptrue'></div><div class='col taggable sortable-items droptrue'></div></section>"
+    }
+  ],
+  "content" : [
+    {
+      "defaultWrapperStart" : "",
+      "defaultWrapperEnd" : "",
+      "addHeading" : "<div data-flow='heading' class='heading-item-design-wrapper editableTargetSelector'><h2 class='heading-design-item' data-flow='is-editable' data-flow-is-post-target='true' data-allows-editor='true'><span contenteditable='false'>$#replacer</span></h2></div>",
+      "addParagraph" : "<div data-flow='paragraph' class='paragraph-item-design-wrapper editableTargetSelector'><p class='paragraph-design-item' data-flow='is-editable' data-flow-is-post-target='true' data-allows-editor='true'><span contenteditable='false'>$#replacer</span></p></div>",
+      "addSingleImage" : "",
+      "addPre" : "<div data-flow='pre' class='pre-item-design-wrapper editableTargetSelector'><button class='copy-target'></button><pre class='pre-design-item' data-flow='is-editable' data-flow-is-post-target='true' data-allows-editor='true'><span contenteditable='false'>$#replacer</span></pre></div>",
+      "addList" : "",
+      "addGallery" : "",
+      "addBlockQuote" : "<div data-flow='blockquote' class='blockquote-item-design-wrapper editableTargetSelector'><blockquote class='blockquote-design-item' data-flow='is-editable' data-flow-is-post-target='true' data-allows-editor='true'><span contenteditable='false'>$#replacer</span></blockquote></div>"
+    }
+  ]
+}

@@ -1,0 +1,598 @@
+.post-content {
+    a {
+        @extend .underline-animation;
+    }
+}
+
+.large {
+    font-size: 2.5em;
+    @media only screen and (min-width: $mobile) {
+        font-size: 3.2em;
+    }
+    @media only screen and (min-width: $landscapeTablet) {
+        font-size: 3.6em;
+    }
+    @media only screen and (min-width: $desktop) {
+        font-size: 4.2em;
+    }
+}
+
+.underline-animation {
+    width: fit-content;
+    &:after {
+        content: '';
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        background-repeat: repeat-x;
+        background-size: 8px 4px;
+        background-position: 0px 0px;
+        padding: 0px;
+        transition: background-position 2s;
+        left: 0;
+        bottom: 0;
+        background-image: linear-gradient(90deg, $lightmodeFade 50%, transparent 50%), linear-gradient(90deg, $lightmodeFade 50%, transparent 50%);
+        @media (prefers-color-scheme: dark) {
+            background-image: linear-gradient(90deg, $darkmodeFade 50%, transparent 50%), linear-gradient(90deg, $darkmodeFade 50%, transparent 50%);
+        }                 
+        @media only screen and (min-width: $mobile) {
+            transition: background-position 2s ease-in-out;
+        }
+    }                   
+    @media only screen and (min-width: $mobile) {     
+        &:hover {
+            &:after {   
+                background-position: 40px 0px;
+                background-image: linear-gradient(90deg, $lightmodeText 50%, transparent 50%), linear-gradient(90deg, $lightmodeText 50%, transparent 50%);
+                @media (prefers-color-scheme: dark) {
+                    background-image: linear-gradient(90deg, $darkmodeText 50%, transparent 50%), linear-gradient(90deg, $darkmodeText 50%, transparent 50%);
+                }           
+            }
+        }
+    }
+}
+
+.row {
+    padding-left: 20px;
+    padding-right: 20px;
+    @media only screen and (min-width: $landscapeTablet) {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    @media only screen and (min-width: $desktop) {
+        padding-left: calc(((100% - 1540px) / 2));
+        padding-right: calc(((100% - 1540px) / 2));
+    }
+}
+
+.padded {
+    padding-bottom: 30px;
+    padding-top: 30px;
+    @media only screen and (min-width: $landscapeTablet) {
+        padding-bottom: 60px;
+        padding-top: 60px;
+    }
+}
+
+.padded-top {
+    padding-top: 30px;
+    @media only screen and (min-width: $landscapeTablet) {
+        padding-top: 60px;
+    }
+}
+.padded-bottom {
+    padding-bottom: 30px;
+    @media only screen and (min-width: $landscapeTablet) {
+        padding-bottom: 60px;
+    }
+}
+
+.col {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+    .two-parts {
+        width: 100%;
+        @media only screen and (min-width: $mobile) {
+            width: calc((100% / 2) - 20px);
+            &:first-child {
+                padding-right: 40px;
+            }
+        }
+    }
+    .two-col {
+        width: 100%;
+        @media only screen and (min-width: $mobile) {
+            padding-right: 40px;
+            width: calc((100% / 2) - 20px);
+            &:last-child {
+                padding-right: 0px;
+            }
+        }
+    }
+    .three-col {
+        width: 100%;
+        @media only screen and (min-width: $mobile) {
+            padding-right: 40px;
+            width: calc((100% / 2) - 20px);
+            &:last-child {
+                padding-right: 0px;
+                width: 100%;
+            }
+        }
+        @media only screen and (min-width: $landscapeTablet) {
+            width: calc((100% / 3) - 20px);
+            &:last-child {
+                width: calc((100% / 3) - 20px);
+            }
+        }
+
+    }
+    .four-col {
+        width: 100%;
+        @media only screen and (min-width: $mobile) {
+            padding-right: 40px;
+            width: calc((100% / 2) - 20px);
+            &:last-child {
+                padding-right: 0px;
+            }
+        }
+        @media only screen and (min-width: $landscapeTablet) {
+            width: calc((100% / 4) - 20px);
+        }
+    }
+    .one-third {
+        width: 100%;
+        @media only screen and (min-width: $mobile) {
+            padding-right: 40px;
+            width: calc((100% / 4) - 20px);
+            &.right {
+                padding-left: 40px;
+                padding-right: 0px;
+            }
+        }
+    }
+    .two-thirds {
+        width: 100%;
+        @media only screen and (min-width: $mobile) {
+            padding-right: 40px;
+            width: calc((100%) - (100% / 4) - 20px);
+            &.right {
+                padding-left: 40px;
+                padding-right: 0px;
+            }
+        }
+    }
+}
+
+.btn {
+    border-radius: 50px;
+    background-color: $greenColor;
+    color: $lightmodeText;
+    position: relative;
+    padding: 10px 20px 10px 20px;
+    font-weight: 500;
+    font-size: 1.14em;
+    @media only screen and (min-width: $mobile) {
+        transition: $transition;
+        &:hover {
+            background-color: $lighthover;
+            @media (prefers-color-scheme: dark) {
+                background-color: $darkhover;
+                color: white;
+                &::before {
+                    filter: brightness(0) invert(1);  
+                }
+            }
+        }
+    }
+}
+
+.flex-row {
+    display: flex !important;
+    flex-flow: column !important;
+    align-items: start;
+    @media only screen and (min-width: $mobile) {
+        flex-flow: row !important;
+        align-items: center;
+    }
+}
+
+.flex-grid-wrapper {
+    &.two-order {
+        height: auto;
+        @media only screen and (min-width: $smallerTablet) {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            display: grid;
+            grid-column-gap: 0px;
+            grid-row-gap: 0px;
+        }
+        div[data-type-order="1"] { 
+            @media only screen and (min-width: $smallerTablet) {
+                grid-area: 1 / 1 / 2 / 2; 
+            }
+        }
+        div[data-type-order="2"] { 
+            @media only screen and (min-width: $smallerTablet) {
+                grid-area: 1 / 2 / 3 / 3; 
+            }
+        }
+        div[data-type-order="3"] { 
+            @media only screen and (min-width: $smallerTablet) {
+                grid-area: 2 / 1 / 3 / 2; 
+            }
+        }
+    }
+}
+
+.large-head {
+    font-size: 4.2em;
+    font-family: $headerFont;
+    line-height: 1.2;
+}
+
+.tooltipitems {
+    &:after {
+        content: attr(data-tooltip);
+        position: absolute;
+        pointer-events: none;
+        top: calc(-100% - 25px);
+        right: 0px;
+        border-radius: 4px;
+        font-family: $bodyFont;
+        padding: 10px;
+        opacity: 0;
+        display: block;
+        z-index: 10;
+        font-size: 13px;
+        white-space: nowrap;           
+        background: $lightmodeFade;
+        color: $lightmodeText;
+        @media (prefers-color-scheme: dark) {
+            background: $darkmodeFade;
+            color: $darkmodeText;
+        }
+    }
+    &.left-tip {
+        &::after {
+            right: auto;
+            left: 0;
+            top: -40px;
+        }
+    }
+    &.bottom-tip {
+        &::after {
+            top: auto;
+            bottom: -40px;
+        }
+    }
+    &.warning-item {
+        &::after {
+            background-color: $error;
+            color: white;
+        }
+    }
+    &.passed-item {
+        &::after {
+            background-color: $success;
+            color: white;
+        }
+    }
+    &:hover {
+        &:after {
+            opacity: 1;
+        }
+    }
+}
+
+#profile-head {
+    .userdisplay {
+        position: relative;
+        vertical-align: top;
+        min-height: 250px;
+        max-height: 500px;
+        height: auto;
+        border-radius: 0px !important;
+        overflow: hidden;
+        img {
+            object-fit: cover;
+            object-position: center;
+        }
+        .gradientDefault {
+            border-radius: 8px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+    .bio {
+        padding: 40px;
+        p {
+            margin-bottom: 30px;
+            &#tagline {
+                margin-bottom: 10px;
+                color: $lightmodeFade;
+                @media (prefers-color-scheme: dark) {
+                    color: $darkmodeFade;
+                }
+            }
+            &#blub {
+                font-size: clamp(1.125rem, 1.125vw, 1.40625rem);
+            }
+        }
+        h1 {
+            margin-bottom: 40px;
+            font-size: clamp(3rem, calc(1.306vw + 1.694rem), 4rem);
+        }
+        .social-wrapper {
+            display: flex;
+            align-items: center;
+            p {
+                margin-bottom: 0px;;
+            }
+            div.additional {
+                height: 40px;
+                width: 40px;
+                border-radius: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 20px;
+                cursor: pointer;
+                background-color: $greenColor;
+                color: $lightmodeText;
+            }
+        }
+    }
+}
+
+.taggable {
+    &:empty {
+        @extend .toggle-append-button;
+    }
+}
+
+.userdisplay {
+    height: 55px;
+    width: 55px;
+    display: block;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    z-index: 3;
+    span, img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        border-radius: 0%;
+        bottom: 0;
+        object-fit: cover;
+        background-position: 50%;
+    }
+}
+
+.col-container {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+    justify-content: space-between;
+    .col {
+        display: flex;
+        flex-flow: column;
+        &:empty {        
+            @extend .toggle-append-button;
+        }
+    }
+    &.two-col-design {
+        .col {
+            width: 100%;
+            @media only screen and (min-width: $mobile) {
+                width: calc((100% / 2) - 20px);
+            }
+        }
+    }
+    &.three-col-design {
+        .col {
+            width: 100%;
+            @media only screen and (min-width: $mobile) {
+                width: calc((100% / 2) - 20px);
+                &:last-child {
+                    width: 100%;
+                }
+            }
+            @media only screen and (min-width: $smallerTablet) {
+                width: calc((100% / 3) - 20px);
+                &:last-child {
+                    width: calc((100% / 3) - 20px);
+                }
+            }
+        }
+    }
+    &.four-col-design {
+        .col {
+            width: 100%;
+            @media only screen and (min-width: $mobile) {
+                width: calc((100% / 2) - 20px);
+            }
+            @media only screen and (min-width: $smallerTablet) {
+                width: calc((100% / 4) - 20px);
+            }
+        }
+    }
+    &.one-third-col-design {
+        .col {
+            width: 100%;
+            @media only screen and (min-width: $mobile-small) {
+                width: calc((100% / 2) - 20px);
+            }
+            @media only screen and (min-width: $smallerTablet) {
+                width: calc((100% / 3) - 20px);
+                &:last-child {
+                    width: calc((100% - (100% / 3)) - 20px );
+                }
+            }
+        }
+
+    }
+    &.two-thirds-col-design {
+        .col {
+            width: 100%;
+            @media only screen and (min-width: $mobile-small) {
+                width: calc((100% / 2) - 20px);
+            }
+            @media only screen and (min-width: $smallerTablet) {
+                width: calc((100% / 3) - 20px);
+                &:first-child {
+                    width: calc((100% - (100% / 3)) - 20px );
+                }
+            }
+        }
+
+    }
+}
+
+.ui-state-highlight {
+    list-style: none;
+    height: 120px;
+    width: 100%;
+    animation: opcaityanimation 0.26s normal forwards ease-in-out;
+    background-color: $lightmodesearch;
+    @media (prefers-color-scheme: dark) {
+        background-color: $darkmodesearch;
+    }
+}
+
+.ui-state-content-highlight {
+    list-style: none;
+	width: 100%;
+	height: 50px;
+	overflow: hidden;
+	padding: 2rem;
+    animation: opcaityanimation 0.26s normal forwards ease-in-out;
+    background-color: $lightmodesearch;
+    @media (prefers-color-scheme: dark) {
+        background-color: $darkmodesearch;
+    }
+}
+
+#data-fragment {
+    display: flex;
+    align-items: center;
+    background: black;
+    padding: 20px;
+    border-radius: 50px;
+    background-color: $lightmodesearch;
+    @media (prefers-color-scheme: dark) {
+        background-color: $darkmodesearch;
+    }
+    figure {
+        margin-right: 15px;
+    }
+}
+
+.align-centre {
+    text-align: center;
+}
+
+.text-content {
+    h1, h2, h3, h4, h5 {
+        margin-bottom: 20px;
+    }
+    p {
+        margin-bottom: 40px;
+    }
+}
+
+.icon-button {
+    padding-left: 50px;
+    &:before {
+        content: '';
+        position: absolute;
+        top: 50%;  
+        left: 15px;
+        transform: translateY(-50%);
+        height: 20px;
+        width: 20px;
+        margin-top: 1px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50%;
+        filter: brightness(0) invert(0);
+        transition: $transition;
+    }
+    &.write-icon {
+        &:before {
+            background-image: url("../images/svg/edit.svg");
+        }
+    }
+}
+
+#postwrapper {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+    .post-item  {
+        width: 100%;
+        @media only screen and (min-width: $mobile) {
+            width: calc((100% / 2) - 20px);
+        }
+        @media only screen and (min-width: $smallerTablet) {
+            width: calc((100% / 3) - 20px);
+        }
+        border-radius: 18px;
+        overflow: hidden;
+        background-color: $lightmodesearch;
+        @media (prefers-color-scheme: dark) {
+            background-color: $darkmodesearch;
+        }
+        figure {
+            width: 100%;
+            img {
+                width: 100%;
+            }
+        }
+        section {
+            padding: 30px;
+            .cat {
+                font-family: $bodyFont;
+                font-size: 14px;
+                color: $lightmodeFade;
+                @media (prefers-color-scheme: dark) {
+                    color: $darkmodeFade;
+                }    
+            }
+            h4 {
+                margin-bottom: 50px;
+            }
+            .box-wrap {
+                display: flex;
+                flex-flow: column;
+                @media only screen and (min-width: $mobile) {
+                    flex-flow: row;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                p {
+                    order: -1;    
+                    font-size: 12px;
+                    padding: 5px 15px;
+                    border-radius: 50px;
+                    background: $lightmodeHR;
+                    margin-bottom: 30px;
+                    width: max-content;
+                    @media (prefers-color-scheme: dark) {
+                        background: $darkmodeHR;
+                    }    
+                    @media only screen and (min-width: $mobile) {
+                        order: 2;
+                        margin-bottom: 0px;
+                    }
+                }
+            }
+        }
+    }
+}

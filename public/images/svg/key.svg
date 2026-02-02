@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="257" height="121" viewBox="0 0 257 121">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-Custom_Size_3);
+      }
+
+      .cls-2, .cls-3, .cls-4, .cls-5, .cls-7 {
+        fill: none;
+      }
+
+      .cls-2, .cls-4, .cls-5 {
+        stroke: #0f1;
+        stroke-width: 18px;
+      }
+
+      .cls-2, .cls-4 {
+        stroke-linecap: round;
+      }
+
+      .cls-2 {
+        stroke-dasharray: 300 500;
+      }
+
+      .cls-4 {
+        stroke-dasharray: 3 500;
+      }
+
+      .cls-6, .cls-8 {
+        stroke: none;
+      }
+
+      .cls-8 {
+        fill: #0f1;
+      }
+    </style>
+    <clipPath id="clip-Custom_Size_3">
+      <rect width="257" height="121"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_3" data-name="Custom Size – 3" class="cls-1">
+    <g id="Ellipse_1" data-name="Ellipse 1" class="cls-2" transform="matrix(0.407, 0.914, -0.914, 0.407, 226.395, -15.736)">
+      <circle class="cls-6" cx="58" cy="58" r="58"/>
+      <circle class="cls-7" cx="58" cy="58" r="49"/>
+    </g>
+    <g id="Path_1" data-name="Path 1" class="cls-3" transform="translate(149.32 76.594) rotate(180)">
+      <path class="cls-6" d="M2.985-.493,127.466,0c9.165,0,16.6,7.163,16.6,16s-7.43,16-16.6,16L4.279,31.941Z"/>
+      <path class="cls-8" d="M 2.98516845703125 -0.4933433532714844 L 127.4662475585938 1.33514404296875e-05 C 136.6316375732422 1.33514404296875e-05 144.0616760253906 7.163440704345703 144.0616760253906 16.0000114440918 C 144.0616760253906 24.8365478515625 136.6316375732422 32.0000114440918 127.4662475585938 32.0000114440918 L 4.279098510742188 31.94147682189941 L 2.98516845703125 -0.4933433532714844 Z"/>
+    </g>
+    <g id="Ellipse_9" data-name="Ellipse 9" class="cls-4" transform="matrix(0.839, 0.545, -0.545, 0.839, 179.946, -19.392)">
+      <circle class="cls-6" cx="58" cy="58" r="58"/>
+      <circle class="cls-7" cx="58" cy="58" r="49"/>
+    </g>
+    <g id="Rectangle_1" data-name="Rectangle 1" class="cls-5" transform="translate(26 48)">
+      <rect class="cls-6" width="67" height="69" rx="25"/>
+      <rect class="cls-7" x="9" y="9" width="49" height="51" rx="16"/>
+    </g>
+  </g>
+</svg>

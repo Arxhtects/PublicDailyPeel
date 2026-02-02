@@ -1,0 +1,59 @@
+extends ../partials/editlayout
+
+block content
+
+    main 
+        section.padded-top.row
+            p.h2 Customise Profile
+
+        section#profile-head.row.padded-top.padded-bottom.col(data-action="allow-customisation", data-user=`${username[0]}`)
+            a.one-third.userdisplay(data-flow="profile", data-user=`${username[0]}` data-target="find-flow-change")
+                if(typeof(username[2]) == 'true')
+                    img(src=`${username[4]}`, data-flow="profile picture", data-user=`${username[0]}`, alt=`${username[0]}`)
+                else 
+                    span.gradientDefault(style=`background: ${username[3]}`, data-flow="Default Profile")
+            
+            div.two-thirds.bio.right.post-content
+                p#tagline(data-flow="is-editable", data-meta="ajax-updateable", data-allows-editor="false") 
+                    span(contenteditable="false", data-is-name="role") !{details[0]}
+                h1#username(data-flow="is-editable", data-meta="ajax-username-updateable", data-allows-editor="false") 
+                    span(contenteditable="false", data-is-name="nickname") !{username[5]}
+                p#blub(data-flow="is-editable", data-meta="ajax-updateable", data-allows-editor="true") 
+                    span(contenteditable="false", data-is-name="blurb") !{details[1]}
+
+                div.social-wrapper(data-flow="is-addable", data-meta="", data-social-count="0")
+                    p Follow: 
+                    div.additional +
+        
+        hr
+
+        section.padded-top.row
+            p.h2 Change Password
+            
+            section#login-head.padded 
+                form#login(action="", data-flow="sign up form")
+                    div.input.form-items.password-type
+                        label(for="currentpass", aria-label="current password") Current Password 
+                        input#currentpass(name="currentpassword", aria-label="signature response", type="password", data-flow="password-toggle")
+                        input.reveal(type="checkbox", aria-label="reveal-password", data-flow="show password")
+                    
+                    div.input.form-items.password-type
+                        label(for="pin") New Password 
+                        input#pin(name="pin", aria-label="signature response", type="password", data-flow="password-toggle")
+                        input.reveal(type="checkbox", aria-label="reveal-password", data-flow="show password")
+                        
+                    div.input.form-items.password-type
+                        label(for="pinRepeat") Repeat Password 
+                        input#pinRepeat(name="pinRepeat", aria-label="signature response", type="password", data-flow="password-toggle")
+                        input.reveal(type="checkbox", aria-label="reveal-password", data-flow="show password")
+ 
+                    button.btn#resetpassword(data-flow="resetpassword", aria-label="Reset Password") Reset Password
+
+        section.padded-top.padded-bottom.row
+            p.h2 Change Ban Address
+
+        section.padded-top.padded-bottom.row
+            p.h2 Discord Link
+
+    footer
+        include ../partials/footer

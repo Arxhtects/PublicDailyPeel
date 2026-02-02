@@ -1,0 +1,45 @@
+extends ../partials/layout
+
+block content
+
+    main 
+        section#profile-head.row.padded-top.padded-bottom.col
+            a.one-third.userdisplay(data-flow="profile", data-user=`${details[0].nickname}` )
+                if(details[0].profileimageurl && details[0].profileimageurl !== '' && details[0].profileimageurl !== null && details[0].profileimageurl !== undefined)
+                    img(src=`${details[0].profileimageurl}`, data-flow="profile picture")
+                else 
+                    span.gradientDefault(style=`background: ${details[0].gradientdefault}`, data-flow="Default Profile")
+            
+            div.two-thirds.bio.right.post-content
+                p#tagline !{details[0].role}
+                h1#username !{details[0].nickname}
+                p#blub !{details[0].blurb}
+
+                div.social-wrapper(data-flow="is-addable", data-meta="", data-social-count="0")
+                    p Follow: 
+                    div.additional +
+        
+        hr
+        
+        section.row.padded-top.padded-bottom 
+            h2 All Users Posts
+
+        #postwrapper.row.padded-top.padded-bottom
+            each item, index in userPosts
+                article.post-item 
+                    figure 
+                        a(href=`/posts/${item.post_slug}` data-post-number=index)
+                            img(src=item.post_thumbnail, alt=item.post_title)
+                    section
+                        div.box-wrap
+                            span.cat= item.post_category
+                            p= item.date
+
+                        h4= item.post_title
+                        
+                        a.btn(href=`/posts/${item.post_slug}` data-post-number=index) Read Post
+
+
+
+    footer
+        include ../partials/footer

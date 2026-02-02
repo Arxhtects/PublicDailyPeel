@@ -1,0 +1,39 @@
+$greenColor : #b9ff66;
+$yellowColor : #f9ff66;
+$lightBg : #f6f4f0;
+$darkBg : #15131d;
+$darkhover : #1b1827;
+$lighthover : #dedede;
+$lightmodeText : #222222;
+$darkmodeText : #f6f4f0;
+$darkmodesearch : #100f14;
+$lightmodesearch : #ffffff;
+$success: #35a655;
+$error: #f66252;
+$info: #1198f5;
+$warning: #f0b32c;
+
+$darkmodeHR : #161616;
+$lightmodeHR : #ebebeb;
+$darkmodeFade : #656565;
+$lightmodeFade : #c1c1c1;
+
+$headerFont: "Abril Fatface", serif;
+$bodyFont: "Lato", sans-serif;
+
+$transition : all .34s ease-in-out;
+$cubicbezier : .4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+$opacitytransition: opacity .3s ease-in-out;
+$positiontransition: bottom .3s ease-in-out;
+$paddingtransition: padding 0.32 ease-in-out;
+
+$desktop : 1600px;
+$landscapeTablet : 1142px;
+$smallerTablet : 1000px;
+$mobile : 876px;
+$mobile-small: 582px;
+$mobile-smaller: 468px;
+$min-supported-size: 390px;
+$footer-min-height: 750px;
+
+$alwaystop : 99;

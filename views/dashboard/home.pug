@@ -1,0 +1,28 @@
+extends ../partials/layout
+
+block content
+
+    main
+        if(posts != "") 
+            #postwrapper.row.padded-top.padded-bottom
+                    each item, index in posts
+                        article.post-item 
+                            figure 
+                                a(href=`/posts/edit?post=${item.post_slug}` data-post-number=index)
+                                    img(src=item.post_thumbnail, alt=item.post_title)
+                            section
+                                div.box-wrap
+                                    span.cat= item.post_category
+                                    p= item.date
+
+                                h4= item.post_title
+                                
+                                a.btn(href=`/posts/edit?post=${item.post_slug}` data-post-number=index) Edit Post
+        else 
+            .row.padded-top.padded-bottom.align-centre.text-content
+                h1.large Such Empty.
+                p You've written zero posts!
+                a.btn.icon-button.write-icon(href="/posts/create") Lets change that
+            
+    footer
+        include ../partials/footer

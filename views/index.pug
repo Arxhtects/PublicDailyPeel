@@ -1,0 +1,21 @@
+extends partials/layout
+
+block content
+    main
+        #postwrapper.row.padded-top.padded-bottom
+            each item, index in posts
+                article.post-item 
+                    figure 
+                        a(href=`/posts/${item.post_slug}` data-post-number=index)
+                            img(src=item.post_thumbnail, alt=item.post_title)
+                    section
+                        div.box-wrap
+                            span.cat= item.post_category
+                            p= item.date
+
+                        h4= item.post_title
+                        
+                        a.btn(href=`/posts/${item.post_slug}` data-post-number=index) Read Post
+
+    footer
+        include partials/footer

@@ -1,0 +1,17 @@
+#addToggle 
+    .toggle-wrapper
+        button(type="button", data-flow="add-elements", aria-label="add layout elements")
+
+#viewportToggle 
+    .toggle-wrapper
+        button.tooltipitems.left-tip.bottom-tip(type="button", data-flow="toggle-desktop-viewport", aria-label="toggle desktop view" data-tooltip="Desktop") 
+        button.tooltipitems.left-tip.bottom-tip(type="button", data-flow="toggle-tablet-viewport", aria-label="toggle tablet view" data-tooltip="Tablet") 
+        button.tooltipitems.left-tip.bottom-tip(type="button", data-flow="toggle-mobile-viewport", aria-label="toggle mobile view" data-tooltip="Mobile") 
+
+#viewportToggle 
+    .toggle-wrapper
+        div
+            button.tooltipitems.left-tip.bottom-tip(type="button", data-flow="toggle-undo", aria-label="undo", data-undo-target="" data-tooltip="Undo") 
+            button.tooltipitems.left-tip.bottom-tip(type="button", data-flow="toggle-redo", aria-label="redo", data-undo-target="" data-tooltip="Redo") 
+        
+        button(type="button", data-flow="publish", aria-label="publish post", data-is-published="false") Publish

@@ -1,0 +1,16 @@
+extends ../partials/editlayout
+
+block content
+
+    main 
+        header#toolbar-wrapper.row
+            div.inner-toolbar-section
+                include tools/toolbar
+            
+            include tools/add
+        
+        section#editable-block.row(data-flow="is-writeable") !{postBody}
+
+
+    footer
+        include ../partials/footer

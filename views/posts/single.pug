@@ -1,0 +1,23 @@
+extends ../partials/layout
+
+block content
+
+    main 
+        section.row 
+            div !{postBody}
+
+            .row.padded.post-content
+                section#data-fragment
+                    figure   
+                        .userdisplay(data-flow="user", data-user=postNickname, rel="nofollow, noindex, noreferrer")
+                            if(typeof(usingProfile) == 'true')
+                                img(src=userImg, data-flow="profile picture", data-user=postNickname, alt=postNickname)
+                            else 
+                                span.gradientDefault(style=`background: ${userImg}`, data-flow="Default Profile")
+                    div
+                        a(href=`/users/${postSlug}`) !{postNickname}
+                        p Published on: 
+                            span= getPostedDate
+
+    footer
+        include ../partials/footer

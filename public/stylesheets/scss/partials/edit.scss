@@ -1,0 +1,604 @@
+[data-flow=is-editable] {
+    &.to-edit, &.active-editing-toggle {
+        position: relative;
+        padding-top: 0px;
+        transition: $paddingtransition;
+        &::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: dashed 4px $lightmodeFade;
+            pointer-events: none;
+            @media (prefers-color-scheme: dark) {
+                border: dashed 4px $darkmodeFade;
+            }
+        }
+        &.active-editing-toggle {
+            padding-top: 20px;
+        }
+        span {
+            display: block;
+            &[contenteditable]:hover {
+                outline: 0px solid transparent;
+            }
+            &[contenteditable]:focus {
+                outline: 0px solid transparent;
+            }
+        }
+    }
+    .editable-button {    
+        position: absolute;
+        top: -30px;
+        left: -30px;
+        height: 40px;
+        width: 40px;
+        background: $greenColor;
+        border-radius: 50%;
+        z-index: 5;
+        cursor: pointer;
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;  
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 20px;
+            width: 20px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50%;
+            background-image: url("../images/svg/edit.svg");
+            filter: brightness(0) invert(0);       
+        }
+        &#saveToggle, &#duplicateToggle {
+            left: auto;
+            right: 20px;
+            background: $greenColor;
+            &:after {
+                background-image: url("../images/svg/edit.svg");
+            }
+        }
+        &#duplicateToggle {
+            &:after {
+                background-image: url("../images/svg/copy.svg");
+            }
+        }
+        &#cancelToggle, &#removeToggle {
+            left: auto;
+            right: -30px;
+            background: $error;
+            &:after {
+                background-image: url("../images/svg/edit.svg");
+            }
+        }
+    }
+}
+
+#edit-toolbar {
+    display: flex;
+    height: 32px;
+    width: 200px;
+    background: transparent;
+    z-index: 99;
+    justify-content: space-around;
+    border-radius: 4px;
+    background: $lightmodesearch;
+    border: solid 1px #b5b5b5;
+    @media (prefers-color-scheme: dark) {
+        border: solid 1px #3b3b3b;
+        background: $darkmodesearch;
+    }
+    button {
+        padding: 5px 10px;
+        cursor: pointer;
+        border: 0px;
+        background: $lightmodesearch;
+        color: $lightmodeText;
+        @media (prefers-color-scheme: dark) {
+            background: $darkmodesearch;
+            color: $darkmodeText;
+        }
+        &:hover {
+            background: $lighthover;
+            @media (prefers-color-scheme: dark) {
+                background: $darkhover;
+            }
+        }
+    }
+}
+
+.hyperlink-input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    .addLink & {
+        opacity: 1;
+        pointer-events: all;
+    }
+    input {
+        display: block;
+        width: 100%;
+        padding: 0px 15px;
+        height: 100%;
+    }
+}
+
+#toolbar-wrapper {
+    position: sticky;
+    top: 110px;
+    #addElements {
+        margin-top: 20px;
+        position: relative;
+        top: -70px;
+        z-index: -1;
+        opacity: 0;
+        pointer-events: none;
+        transition: $transition;
+        max-height: 0px;
+        .toggle-add-elements &{
+            top: 0;
+            opacity: 1;
+            pointer-events: all;
+            max-height: 10000px;
+        }
+        .two-col {
+            flex-flow: column;
+            padding: 20px;
+            width: 100%;
+            border-radius: 8px;
+            @media only screen and (min-width: $mobile) {
+                padding-right: 40px;
+                width: calc((100% / 2) - 20px);
+                &:last-child {
+                    padding-right: 0px;
+                }
+            }
+            h3 {
+                font-family: $bodyFont;
+                margin-bottom: 20px;
+            }
+        }
+    }
+    .inner-toolbar-section {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        padding: 10px;
+        border-radius: 50px;
+        background-color: $lightmodesearch;
+        border: solid 1px #d0d0d0;
+        @media (prefers-color-scheme: dark) {
+            border: solid 1px #262626;
+            background-color: $darkmodesearch;
+        }
+    }
+    button {
+        font-size: 12px;
+        font-weight: 700;
+        border-radius: 50px;
+        color: $lightmodeText;
+        position: relative;
+        border: 0px;
+        height: 37px;
+        width: 37px;
+        margin-right: 10px;
+        background-color: $lightmodesearch;
+        color: black;
+        @media (prefers-color-scheme: dark) {
+            color: white;
+            background-color: $lightmodeText;
+        }
+        @media only screen and (min-width: $mobile) {
+            cursor: pointer;
+            transition: $transition;
+            &:hover {
+                background-color: $lighthover;
+                @media (prefers-color-scheme: dark) {
+                    background-color: $darkhover;
+                    color: white;
+                    &::before {
+                        filter: brightness(0) invert(1);  
+                    }
+                }
+            }
+        }
+        &:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 20px;
+            width: 20px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50%;
+            filter: brightness(0) invert(0);   
+            @media (prefers-color-scheme: dark) {
+                filter: brightness(0) invert(1);   
+            }                
+            @media only screen and (min-width: $mobile) {
+                transition: $transition;
+            }
+        }
+        &[data-flow="toggle-desktop-viewport"] {
+            &:before {
+                background-image: url("../images/png/Desktop.png");
+            }
+        }
+        &[data-flow="toggle-tablet-viewport"] {
+            &:before {
+                background-image: url("../images/png/Tablet.png");
+            }
+        }
+        &[data-flow="toggle-mobile-viewport"] {
+            &:before {
+                background-image: url("../images/png/Mobile.png");
+            }
+        }
+        &[data-flow="publish"] {
+            margin-right: 0px;
+            background: $greenColor;
+            padding: 10px 20px 10px 20px;
+            width: auto;
+            color: black;
+            &:before {
+                left: 20px;
+                @media only screen and (min-width: $mobile) {
+                    left: 35px;
+                }
+                filter: brightness(0) invert(0); 
+                background-image: url("../images/svg/edit.svg");
+            }
+            @media only screen and (min-width: $mobile-smaller) {
+                padding: 10px 30px 10px 60px;
+                cursor: pointer;
+            }
+            @media only screen and (min-width: $mobile) {
+                transition: $transition;
+                &:hover {               
+                    color: black;
+                    background-color: $lighthover;
+                    @media (prefers-color-scheme: dark) { 
+                        color: white;
+                        background-color: $darkhover;
+                    }
+                    &:before {  
+                        filter: brightness(0) invert(0); 
+                        @media (prefers-color-scheme: dark) { 
+                            filter: brightness(0) invert(1); 
+                        }
+                    }
+                }
+            }
+        }
+        &[data-flow="toggle-undo"] {
+            &:before {
+                background-image: url("../images/png/undo.png");
+            }
+        }
+        &[data-flow="toggle-redo"] {
+            &:before {    
+                top: 10px;
+                transform: rotateY(180deg) translate(50%);
+                transform-origin: bottom;
+                background-image: url("../images/png/undo.png");
+            }
+        }
+        &[data-flow="add-elements"] {
+            &::after {
+                content: '+';
+            }
+        }
+    }
+    .toggle-wrapper {
+        display: flex;
+        button {
+            position: relative;
+        }
+        div {
+            margin-right: 20px;
+            padding-right: 10px;
+            border-right: solid 1px $lightmodeFade;
+            @media (prefers-color-scheme: dark) {
+                border-right: solid 1px $darkmodeFade;
+            }  
+        }
+    }
+    .elementlistitems {
+        display: flex;
+        flex-flow: row wrap;
+        list-style: none;
+        font-family: $bodyFont;
+        gap: 10px;
+        max-width: 300px;
+    }
+}
+
+.addtoggleclass {
+    list-style: none;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    span {
+        font-size: 0.8em;
+    }
+    background: white;
+    @media (prefers-color-scheme: dark) {
+        background: black;
+    }  
+}
+
+#editable-block {
+    padding-bottom: 100px;
+    min-height: 100vh;
+    margin-top: 30px;
+    display: flex;
+    flex-flow: column;
+    .alwaysOnBottom {
+        width: 100%;
+        order: 222222222222222222222222222222222222222222222222222222222;
+    }
+}
+
+.toggle-append-button {
+    cursor: pointer;
+    height: 120px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: dashed 4px $lightmodeFade;
+    @media (prefers-color-scheme: dark) {
+        border: dashed 4px $darkmodeFade;
+    }  
+    &:after {
+        content: '+';
+        position: absolute;
+        font-size: 2.3em;
+    }
+    @media only screen and (min-width: $mobile) {
+        transition: $transition;
+        &:hover {
+            background: $lightmodesearch;
+            @media (prefers-color-scheme: dark) {
+                background: $darkmodesearch;
+            }
+        }
+    }
+}
+
+.ui-draggable-dragging {
+    transform: rotate(-4.5deg);
+    opacity: 0.87;
+    box-shadow: 0 0px 40px #d5d5d591;
+    border: solid 1px #e3e3e3;
+    @media (prefers-color-scheme: dark) {
+        box-shadow: 0 0px 40px #000000b0;
+        border: solid 1px #181818;
+    }
+    &:after {
+        display: none;
+    }
+}
+
+#edit-selector-wrap {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 38px;
+    width: auto;
+    background: tomato;
+    display: flex;
+    overflow: hidden;
+    border-radius: 0px 0px 0px 7px;
+    #move-item-selector, #edit-item-selector, #delete-item-selector, #edit-row-item-selector {
+        width: calc(132px / 3);
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        cursor: pointer;
+        transition: $transition;
+        &:before {    
+            content: '';
+            font-size: 18px;
+            text-align: center;
+            height: 30px;
+            width: 30px;
+            background-size: contain;
+            background-position: 50%;
+            margin: 0 auto;
+        }
+        &:hover {
+            background: black;
+        }
+    }
+    #move-item-selector {
+        background: $greenColor;
+        cursor: grab;
+        &.grabbing {
+            cursor: grabbing !important;
+        }
+        &:before {
+            background-image: url('../images/svg/edit.svg');
+        }
+    }
+    #edit-item-selector, #edit-row-item-selector {
+        background: $success;
+        &:before {
+            background-image: url('../images/svg/edit.svg');
+        }
+    }
+    #delete-item-selector {
+        background: $error;
+        &:before {
+            background-image: url('../images/svg/edit.svg');
+        }
+    }
+}
+
+.editableRowTargetSelector {
+    position: relative;
+}
+
+//Design elements 
+$defaultmargin: 60px;
+$defaultheadingmaxwidth: 1200px;
+$defaultparagraphmaxwidth: 1200px;
+
+.post-heading {
+    order: -100000000000000000000000000000000;
+    #post-heading-title {
+        width: 100%;
+        text-align: center;
+        max-width: $defaultheadingmaxwidth;
+        margin: 0 auto;
+        margin-bottom: 60px;
+        font-size: 1.87em;
+        @media only screen and (min-width: $landscapeTablet) {
+            font-size: 2.67em;
+        }
+        @media only screen and (min-width: $landscapeTablet) {
+            font-size: 3.3em;
+        }
+    }
+
+    #category-tag {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    #post-thumb-nail {
+        width: 100%;
+    }
+}
+
+
+.pre-item-design-wrapper {
+    margin: 0 auto;
+    margin-bottom: $defaultmargin;
+    max-width: $defaultparagraphmaxwidth;
+    position: relative;
+    border-left: solid 3px $greenColor;
+    padding: 40px 20px 20px 20px;
+    background: $lightmodesearch;
+    margin-bottom: $defaultmargin;
+    @media (prefers-color-scheme: dark) {
+        background: $darkmodesearch;
+    }
+    .copy-target {            
+        background-image: url('../images/svg/copy.svg');
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        height: 20px;
+        width: 20px;
+        border: 0;
+        background-size: contain;
+        background-color: transparent;
+        background-repeat: no-repeat;
+        filter: brightness(0) invert(0);
+        cursor: pointer;
+        @media (prefers-color-scheme: dark) {
+            filter: brightness(0) invert(1);
+        }
+    }
+}
+
+.paragraph-item-design-wrapper {
+    margin: 0 auto;
+    margin-bottom: $defaultmargin;
+    max-width: $defaultparagraphmaxwidth;
+    p {
+        line-height: 1.4;
+        font-size: 1.2em;
+        @media only screen and (min-width: $landscapeTablet) {
+            line-height: 1.65;
+            font-size: 1.45em;
+        }
+        @media only screen and (min-width: $landscapeTablet) {
+            line-height: 1.84;
+            font-size: 1.64em;
+        }
+        span {
+            display: block;
+            width: 100%;
+        }
+    }
+}
+
+.heading-item-design-wrapper {
+    margin: 0 auto;
+    margin-bottom: $defaultmargin;
+    max-width: $defaultparagraphmaxwidth;
+    h2 {
+        font-size: 1.45em;
+        @media only screen and (min-width: $landscapeTablet) {
+            font-size: 2.32em;
+        }
+        @media only screen and (min-width: $landscapeTablet) {
+            font-size: 3em;
+        }
+        span {
+            display: block;
+            width: 100%;
+        }
+    }
+}
+
+.blockquote-item-design-wrapper {
+    font-family: $headerFont;
+    font-size: 2.15em;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: $defaultmargin;
+    padding: 0px 30px;
+    position: relative;
+    &:before, &:after {
+        content: '';
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        filter: brightness(0) invert(0);
+        @media (prefers-color-scheme: dark) {
+            filter: brightness(0) invert(1);
+        }
+    }
+    &:before {
+        top: 0;
+        left: 0;
+        background-image: url("../images/svg/quote.svg");
+    }
+    &:after {
+        bottom: 0;
+        right: 0;
+        background-image: url("../images/svg/quote.svg");
+        transform-origin: center;
+        transform: rotate(-180deg);
+    }
+    @media only screen and (min-width: $landscapeTablet) {
+        font-size: 2.82em;
+    }
+    @media only screen and (min-width: $landscapeTablet) {
+        font-size: 3.45em;
+    }
+}
+
+.column-target-wrap {
+    max-width: $defaultparagraphmaxwidth;
+    margin: 0 auto;
+}

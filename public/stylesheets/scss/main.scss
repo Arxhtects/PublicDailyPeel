@@ -1,0 +1,252 @@
+@import "partials/vars";
+
+* {
+    margin: 0;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html, body {
+    background: $lightBg;
+    @media (prefers-color-scheme: dark) {
+        background: $darkBg;
+    }
+}
+
+main {
+    position: relative;
+    z-index: 2;
+    background: $lightBg;
+    @media (prefers-color-scheme: dark) {
+        background: $darkBg;
+    }
+}
+
+
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
+    font-weight: 400;
+    font-family: $headerFont;
+    color: $lightmodeText;
+    @media (prefers-color-scheme: dark) {
+        color: $darkmodeText;
+    }
+}
+
+p {
+    font-weight: 400;
+    font-family: $bodyFont;
+    line-height: 1.6;
+    color: $lightmodeText;
+    @media (prefers-color-scheme: dark) {
+        color: $darkmodeText;
+    }
+}
+
+label {
+    font-weight: 400;
+    font-family: $bodyFont;
+    line-height: 1.6;
+    font-size: 0.8em;
+    color: lighten($lightmodeText, 20%);
+    @media (prefers-color-scheme: dark) {
+        color: darken($darkmodeText, 10%);
+    }
+}
+
+a {
+    font-weight: 400;
+    font-family: $bodyFont;
+    text-decoration: none;
+    position: relative;
+    color: $lightmodeText;
+    @media (prefers-color-scheme: dark) {
+        color: $darkmodeText;
+    }
+}
+
+hr {
+    height: 1px;
+    border: 0;
+    max-width: 1540px;
+    margin: 0 auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    @media only screen and (min-width: $mobile) {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    background-color: $lighthover;
+    @media (prefers-color-scheme: dark) {
+        background-color: $darkhover;
+    }
+}
+
+em {
+    font-family: $bodyFont;
+    font-weight: 400;
+}
+
+#carousel-wrapper {
+    article.review {
+        font-family: $bodyFont;
+        display: flex;
+        width: 100%;
+        flex-flow: column;
+        align-items: center;
+        @media only screen and (min-width: $smallerTablet) {
+            align-items: start;
+        }
+        .quote {
+            margin-bottom: 30px;
+            height: 30px;
+            width: 50px;
+            position: relative;
+        }
+        blockquote {
+            font-size: 25px;
+            text-align: center;
+            @media only screen and (min-width: $mobile) {
+                text-align: left;
+            }
+        }
+        .user {
+            display: flex;
+            flex-flow: row;
+            padding-top: 30px;
+            align-items: center;
+            figure {
+                height: 50px;
+                min-width: 50px;
+                margin-right: 30px;
+                border-radius: 100%;
+                background: blue;
+            }
+            .name {
+                display: flex;
+                width: 100%;
+                flex-flow: column;
+            }
+        }
+    }
+}
+
+.toast {
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    width: calc(100% - 80px);
+    transform: translateX(-50%);
+    max-width: 650px;
+    margin: 40px 40px 40px 0px;
+    display: flex;
+    flex-flow: column;
+    border-radius: 18px;
+    background-color: $lightmodesearch;
+    box-shadow: 0 0px 40px #d5d5d591;
+    border: solid 1px #e3e3e3;
+    @media (prefers-color-scheme: dark) {
+        box-shadow: 0 0px 40px #000000b0;
+        border: solid 1px #181818;
+        background-color: $darkmodesearch;
+    }
+    padding: 20px 40px 20px 60px;
+    @media only screen and (min-width: $mobile) {
+        padding: 30px 60px 30px 80px;
+    }
+    .toast-head {
+        font-family: $bodyFont;
+        font-size: 22px;
+    }
+    &:before {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50%;                   
+        @media only screen and (min-width: $mobile) {
+            transition: $transition;
+        }
+        left: 20px;
+        top: 30px;
+        height: 25px;
+        width: 25px;
+        @media only screen and (min-width: $mobile) {
+            top: 35px;
+            left: 30px;
+            height: 30px;
+            width: 30px;
+        }
+    }
+    &.successmsg {
+        &:before {
+            background-image: url();
+            background-color: $success;
+        }
+        .toast-head {
+            color: $success;
+        }
+    }
+    &.errormsg {
+        &:before {
+            background-image: url();
+            background-color: $error;
+        }
+        .toast-head {
+            color: $error;
+        }
+    }
+    &.warningmsg {
+        &:before {
+            background-color: $warning;
+            background-image: url();
+        }
+        .toast-head {
+            color: $warning;
+        }
+    }
+    &.infomsg {
+        &:before {
+            background-color: $info;
+            background-image: url();
+        }
+        .toast-head {
+            color: $info;
+        }
+    }
+    .closebutton {
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:after {
+            content: 'x';
+            font-size: 1.3em;
+            color: $lightmodeFade;
+            @media (prefers-color-scheme: dark) {
+                color: $darkmodeFade;
+            }  
+        }
+    }
+    opacity: 0;
+    pointer-events: none;
+    top: -60px;
+    transition: $transition;
+    &.active {
+        opacity: 1;
+        pointer-events: all;
+        top: 0;
+    }
+}
+
+@import "partials/login";
+@import "partials/menu";
+@import "partials/reusable";
+@import "partials/footer";
+@import "partials/edit";
+@import "partials/animation";

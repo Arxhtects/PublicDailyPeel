@@ -1,0 +1,284 @@
+#login-head {
+    text-align: left;
+    .top-item {
+        margin: auto;
+        text-align: center;        
+        .underline-animation {
+            display: block;
+            margin: 0 auto;
+            margin-top: 30px;
+            @media only screen and (min-width: $min-supported-size) {
+                display: inline-block;
+            }
+        }
+        .btn {
+            @media only screen and (min-width: $min-supported-size) {
+                margin-right: 30px;
+            }            
+        }
+        p {
+            margin: 0 auto;
+            margin-bottom: 30px;
+            @media only screen and (min-width: $landscapeTablet) {
+                margin: unset;
+                margin-bottom: 30px;
+            }
+        }
+        @media only screen and (min-width: $smallerTablet) {
+            text-align: left;
+            margin: unset;
+            padding-right: 40px;
+        }
+    }
+    h1 {
+        font-size: 1.86em;
+        line-height: 1.4;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        @media only screen and (min-width: $mobile) {
+            font-size: 2.45em;
+        }
+        @media only screen and (min-width: $landscapeTablet) {
+            font-size: 3.55em;
+        }
+    }
+    p {
+        max-width: 480px;
+        margin-bottom: 30px;
+    }
+    .login-icon {
+        height: 60px;
+        width: 60px;
+        background: $greenColor;
+        border-radius: 50px;
+        display: block;
+        position: relative;
+        margin: 0 auto;
+        @media only screen and (min-width: $smallerTablet) {
+            margin: unset;
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;  
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50%;
+            background-image: url("../images/svg/monkeythicker.svg");
+            height: 40px;
+            width: 40px;
+            filter: brightness(0) invert(0);
+        }
+    }
+    i.quote {
+        position: relative;
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;  
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50%;
+            background-image: url("../images/svg/quote.svg");
+            left: 25px;
+            height: 50px;
+            width: 50px;
+            filter: brightness(0) invert(0);
+            @media (prefers-color-scheme: dark) {
+                filter: brightness(0) invert(1);
+            }
+        }
+    }
+}
+
+form#login {
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    padding: 30px;
+    background-color: $lightmodesearch;
+    @media (prefers-color-scheme: dark) {
+        background-color: $darkmodesearch;
+    }
+    .btn {
+        border: 0;
+        max-width: fit-content;  
+        margin-bottom: 20px;
+        @media only screen and (min-width: $mobile) {
+            margin-bottom: 0px;
+            margin-right: 30px;
+        }
+    }
+    a {
+        display: inline-block;
+        max-width: max-content;
+        &.question {
+            &:after {
+                right: 0;
+                left: auto;
+                @media only screen and (min-width: $min-supported-size) {
+                    width: calc(100% - 30px);
+                }
+            }
+        }
+        span {
+            &:first-child {
+                font-size: 10px;
+                padding: 0px 4px;
+                border-radius: 50px;
+                border: solid 1px white;
+                margin-right: 15px;   
+                border: solid 1px $lightmodeText;
+                @media (prefers-color-scheme: dark) {
+                    border: solid 1px $darkmodeText;
+                }
+            }
+        }
+    }
+    div {
+        display: flex;
+        flex-flow: column;
+        &.input {
+            margin-bottom: 40px;
+        }
+        .copy-toggle-target {
+            position: relative;
+            margin: 0px 0px 0px 15px;
+            cursor: pointer;
+            &:after {
+                content: '';
+                margin-top: 3px;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                height: 15px;
+                width: 15px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: 50%;
+                background-image: url("../images/svg/copy.svg");
+                filter: brightness(0) invert(0);
+                @media (prefers-color-scheme: dark) {
+                    filter: brightness(0) invert(1);
+                }
+            }
+        }
+        &.sig-input {
+            margin-bottom: 20px;
+        }
+        #copy-text-target {
+            background: transparent;
+            border: 0px;
+            field-sizing: content;
+            max-width: 300px;
+            text-overflow: ellipsis;
+        } 
+        &.password-type {
+            &:after {    
+                content: '';
+                height: 58px;
+                width: 30px;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: 50%;
+                background-image: url(../images/svg/showpass.svg);
+                margin-right: 15px;
+                pointer-events: none;
+                filter: brightness(0) invert(0);
+                @media (prefers-color-scheme: dark) {
+                    filter: brightness(0) invert(1);
+                }
+            }
+            &.toggled {
+                &:after {
+                    background-image: url(../images/svg/hidepass.svg);
+                }
+            }
+        }
+        &.form-items {
+            position: relative;
+            input {
+                width: 100%;
+                font-size: 14px;
+                padding: 20px 80px 20px 20px;
+                border: 0;
+                font-family: $bodyFont;
+                background-color: $lightmodesearch;
+                border-bottom: solid 1px $lighthover;
+                @media (prefers-color-scheme: dark) {
+                    background-color: $darkmodesearch;
+                    border-bottom: solid 1px $darkhover;
+                }
+                @media only screen and (min-width: $mobile) {
+                    padding: 20px 80px 20px 30px;
+                }
+                &#pinRepeat, &#pin {
+                    padding: 20px 110px 20px 20px;
+                }
+                &.reveal {
+                    position: absolute;
+                    bottom: 0;
+                    right: 20px;
+                    width: 20px;
+                    height: 58px;
+                    opacity: 0;
+                }
+            }
+        }
+    }
+}
+
+.warning-item, .passed-item {
+    position: absolute;
+    top: 38px;
+    right: 20px;
+    height: 25px;
+    width: 25px;
+    color: $error;
+    border-radius: 50%;
+    border: 1px solid $error;
+    text-align: center;
+    &::before {
+        font-size: 1em;
+    }
+    &.right-tool {
+        right: 60px;
+    }
+}
+
+.warning-item {
+    border: 1px solid $error;
+    color: $error;
+    padding-top: 3px;
+    &::before {
+        content: '!';
+    }
+}
+
+.passed-item {
+    border: 1px solid $success;
+    color: $success;
+    &::before {
+        content: '✓';
+    }
+}
+
+.bottom-item {
+    padding-top: 50px;
+    padding-bottom: 60px;
+    @media only screen and (min-width: $smallerTablet) {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-right: 40px;
+    }
+}

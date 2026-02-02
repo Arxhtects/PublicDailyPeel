@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="328" height="260" viewBox="0 0 328 260">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_10" data-name="Path 10" d="M0,0H335.151V252.451H260.595l-92.05,7.382,58.829-73.364-20.417-28.376L102.1,259.833,0,252.451Z" fill="#fff"/>
+    </clipPath>
+    <clipPath id="clip-Custom_Size_7">
+      <rect width="328" height="260"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_7" data-name="Custom Size – 7" clip-path="url(#clip-Custom_Size_7)">
+    <line id="Line_5" data-name="Line 5" y1="207.837" x2="194.779" transform="translate(64.803 23.66)" fill="none" stroke="#0f1" stroke-linecap="round" stroke-width="18"/>
+    <path id="Path_8" data-name="Path 8" d="M1989.437,131.677l-49.226-64.313s-20.961-29.069-21.026-29.753,31.918,0,31.918,0,20.206-.239,20.463,0,22.159,29.753,22.159,29.753l25.52,33.677" transform="translate(-1863.989 -13.769)" fill="none" stroke="#0f1" stroke-linecap="round" stroke-width="18"/>
+    <g id="Mask_Group_3" data-name="Mask Group 3" transform="translate(-9 2)" clip-path="url(#clip-path)">
+      <path id="Path_9" data-name="Path 9" d="M1948.994,37.306l49.225,64.313s20.961,29.069,21.026,29.753-31.918,0-31.918,0-20.206.239-20.462,0-22.159-29.753-22.159-29.753l-25.52-33.677" transform="translate(-1736.174 95.448)" fill="none" stroke="#0f1" stroke-linecap="round" stroke-width="18"/>
+    </g>
+    <line id="Line_8" data-name="Line 8" x2="5.441" y2="6.529" transform="translate(176.53 169.031)" fill="none" stroke="#0f1" stroke-linecap="round" stroke-width="18"/>
+    <line id="Line_10" data-name="Line 10" x2="4.353" y2="5.441" transform="translate(203.91 205.117)" fill="none" stroke="#0f1" stroke-linecap="round" stroke-width="18"/>
+  </g>
+</svg>
