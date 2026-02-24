@@ -144,8 +144,8 @@ $(document).on({
 $(document).on({
     "click": function() {
         const parseData = $("#editable-block").html();
-        const parseTitle = $('[data-is-name="post-title"]').text();
-        const parseCat = $('[data-is-name="category"]').text();
+        const parseTitle = $('[data-is-name="post-title"]').text().trim(); //sanatise
+        const parseCat = $('[data-is-name="category"]').text().trim();
         const parsePostThumb = $('#post-thumb-nail').attr("src");
         $.post("/auth/ajax/publish", {postTitle: parseTitle, postCat: parseCat, postThumb: parsePostThumb, content: JSON.stringify(parseData)}, function(data) {
             callToast(data[0], data[1], data[2]);

@@ -39,7 +39,7 @@ router.get('/', function(req, res, next) {
 		if(results != "false") {
 			res.render('index', {title: title.homeTitle, date: functions.getDate, username: getUser, posts: results});
 		} else {	
-			res.redirect("/404")
+			res.redirect("/404");
 		}
 	});
 });
@@ -128,7 +128,7 @@ router.get('/sign-up', function(req, res, next) {
   }
 });
 
-router.post('/sign-up', function(req, res, next) {
+router.post('/sign-up', function(req, res, next) { //re-write this dreadful if nesting good lord.
 	let getUser = req.body.user;
   	let getPin = req.body.pin;
 	let getRepeatedPin = req.body.pinRepeat;

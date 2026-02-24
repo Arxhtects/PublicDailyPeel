@@ -4,7 +4,7 @@ const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "dailypeel",
+    database: "cl46-dailypeel",
     multipleStatements: true
 });
 

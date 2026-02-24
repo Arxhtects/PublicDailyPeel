@@ -123,7 +123,7 @@ module.exports = {
             return callback(setMessagetopass)
         } else {      
             let setMessagetopass = [];
-            let setPostSlug = setPostTitle.replace(/ /g, "-").toLowerCase();
+            let setPostSlug = setPostTitle.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
             const defineCheckSlugExistsQuery = `SELECT * FROM posts WHERE post_slug REGEXP ?`;
             connection.query(defineCheckSlugExistsQuery, [`${setPostSlug}[0-9]+$`],  function(error, results, fields) {
                 if (error) throw error;
@@ -137,11 +137,19 @@ module.exports = {
                 if (error) throw error;	
                 if (results.length > 0) {
                     console.log(results);
-                    let setUpdateQuery  = [
-                        `UPDATE posts SET post_title = '${setPostTitle}', post_category = '${setPostCategoy}', post_type = 'post', post_thumbnail = '${setpostThumb}' WHERE post_meta_id = '${postMetaId}' AND connected_user_meta = '${userMetaId}'`,
-                        `UPDATE post_body SET body = '${JSON.stringify(postContent)}' WHERE post_meta_id = '${postMetaId}' AND connected_user_meta = '${userMetaId}'`
+
+                    //TODO: update all sql to work with values like this cos its better init.
+                    const sql = [
+                        `UPDATE posts SET post_title = ?, post_category = ?, post_type = 'post', post_thumbnail = ? WHERE post_meta_id = ? AND connected_user_meta = ?`,
+                        `UPDATE post_body SET body = ? WHERE post_meta_id = ? AND connected_user_meta = ?`
+                    ].join(';');
+
+                    const values = [
+                        setPostTitle, setPostCategoy, setpostThumb, postMetaId, userMetaId, // First query
+                        '"' + postContent + '"', postMetaId, userMetaId              // Second query
                     ];
-                    connection.query(setUpdateQuery.join(';'),  function(error, results, fields) {
+
+                    connection.query(sql, values,  function(error, results, fields) {
                         if (error) throw error;	
                         if (results.length > 0) {
 					        setMessagetopass = [ "successmsg", "Yay! It worked, Phew.", setPostTitle + " has been succesfully updated." ]
@@ -151,18 +159,20 @@ module.exports = {
                             return callback(setMessagetopass)
                         }
                     });
-                } else {                 
-                    const now = new Date();
+                } else {   
+                    let setInsertQuery = [
+                        `INSERT INTO posts (post_title, post_category, post_meta_id, post_type, connected_user_meta, post_thumbnail, post_slug, connected_account_slug, date) 
+                        VALUES (?, ?, ?, 'post', ?, ?, ?, ?, NOW())`,
+                        
+                        `INSERT INTO post_body (post_meta_id, connected_user_meta, body) 
+                        VALUES (?, ?, ?)`
+                    ].join(';');
 
-                    const day = now.getDate();
-                    const month = now.getMonth() + 1;
-                    const year = now.getFullYear();    
-                    const setPublishDate =  day + "/" + month + "/" + year;
-                    let setInserQuery  = [
-                        `INSERT INTO posts (post_title, post_category, post_meta_id, post_type, connected_user_meta, id, post_thumbnail, post_slug, connected_account_slug, date) VALUES ('${setPostTitle}', '${setPostCategoy}', '${postMetaId}', 'post', '${userMetaId}', NULL, '${setpostThumb}', '${setPostSlug}', '${userSlug}', '${setPublishDate}')`,
-                        `INSERT INTO post_body (id, post_meta_id, connected_user_meta, body) VALUES (NULL, '${postMetaId}', '${userMetaId}', '${JSON.stringify(postContent)}')`,
+                    const values = [
+                        setPostTitle, setPostCategoy, postMetaId, userMetaId, setpostThumb, setPostSlug, userSlug, // First query
+                        postMetaId, userMetaId, JSON.stringify(postContent) 
                     ];
-                    connection.query(setInserQuery.join(';'),  function(error, results, fields) {
+                    connection.query(setInsertQuery, values,  function(error, results, fields) {
                         if (error) throw error;	
                         if (results.length > 0) {
                         } else {
@@ -176,7 +186,7 @@ module.exports = {
     },
     callFindPosts: function(slug, type, target, callback) {
         if(slug != "" && slug != "undefined" && slug != null && type != "userAll") {
-            const getPostData = `SELECT * FROM posts WHERE post_slug = '${slug}'`;
+            const getPostData = `SELECT * FROM posts WHERE post_slug = '${slug}' ORDER BY date DESC`;
             connection.query(getPostData,  function(error, results, fields) {
                 if (error) throw error;	
                 if (results.length > 0) {
@@ -184,11 +194,14 @@ module.exports = {
                     let metadata = results;
                     let getPostMetaId = results[0].post_meta_id;
                     let findUserNickname = results[0].connected_account_slug;
-                    let setQuery  = [
-                        `SELECT * FROM post_body WHERE post_meta_id = '${getPostMetaId}'`,
-                        `SELECT account_slug, nickname, gradientdefault, profileimageurl FROM accounts_meta WHERE account_slug = '${findUserNickname}'`
-                    ];
-                    connection.query(setQuery.join(';'),  function(error, results, fields) {
+                    let setQuery = [
+                        `SELECT * FROM post_body WHERE post_meta_id = ?`,
+                        `SELECT account_slug, nickname, gradientdefault, profileimageurl FROM accounts_meta WHERE account_slug = ?`
+                    ].join(';');
+
+                    let queryValues = [getPostMetaId, findUserNickname];
+
+                    connection.query(setQuery, queryValues,  function(error, results, fields) {
                         if (error) throw error;	
                         if (results.length > 0) {
                             bodydata = results;
@@ -205,13 +218,13 @@ module.exports = {
         } else {
             if(slug != "" && slug != "undefined" && slug != null && type == "userAll") {
                 if(target == "user") {
-                    const setQuery  =`SELECT * FROM posts WHERE connected_account_slug = '${slug}'`;
+                    const setQuery  =`SELECT * FROM posts WHERE connected_account_slug = '${slug}' ORDER BY date DESC`;
                     connection.query(setQuery,  function(error, results, fields) {
                         if (error) throw error;	
                         return callback(results); 
                     });
                 } else {
-                    const setQuery = `SELECT * FROM posts`;
+                    const setQuery = `SELECT * FROM posts ORDER BY date DESC`;
                     connection.query(setQuery,  function(error, results, fields) {
                         if (error) throw error;	
                         return callback(results); 

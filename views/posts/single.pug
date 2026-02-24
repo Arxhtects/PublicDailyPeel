@@ -17,7 +17,7 @@ block content
                     div
                         a(href=`/users/${postSlug}`) !{postNickname}
                         p Published on: 
-                            span= getPostedDate
+                            span= getPostedDate.toLocaleDateString('en-GB')
 
     footer
         include ../partials/footer
