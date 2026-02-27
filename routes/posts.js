@@ -37,14 +37,14 @@ router.get('/edit', function(req, res, next) {
 		typeof functions.callLoginMetaData(req, "check", "", function(result) {
 			if(result == "true") {
 				let slug = req.query.post;
-				console.log(slug);
+				//console.log(slug);
 				typeof functions.callFindPosts(slug, "", "", function(getMetaData, getBodyData, resultIsValid) {
 					if(resultIsValid == "true") {
 						req.session.postmetaid = getMetaData[0].post_meta_id;
 						req.session.save();
-						res.render('posts/edit', { title: title.siteTitle + "editing: " + getMetaData[0].post_title, getDate: functions.getDate, postData: getMetaData, postBody: getBodyData[0][0].body.substring(1, getBodyData[0][0].body.length-1), username: getUser});
+						res.render('posts/edit', { title: title.siteTitle + "editing: " + getMetaData[0].post_title, getDate: functions.getDate, postData: getMetaData, postBody: getBodyData[0][0].body.substring(1, getBodyData[0][0].body.length-1), username: getUser, isEdit: "true"});
 					} else {
-						res.render('posts/edit', { title: title.dashboardHome, errormsg: "unable to find data unfortuantly", posts: "", getDate: functions.getDate, username: getUser, isbeingedited: "true", postData: "", postBody: ""});
+						res.render('posts/edit', { title: title.dashboardHome, errormsg: "unable to find data unfortuantly", posts: "", getDate: functions.getDate, username: getUser, isbeingedited: "true", postData: "", postBody: "", isEdit: "true"});
 					}
 				});
 			} else {
@@ -63,22 +63,63 @@ router.get('/*', function(req, res, next) {
 			getUser = result;
 		});
 	}
-	let slug = req.originalUrl
-	slug = slug.split('/posts/')[1];
-	typeof functions.callFindPosts(slug, "", "", function(getMetaData, getBodyData, resultIsValid) {
-		if(resultIsValid == "true") {
-			let usingProfileimg = "false";
-			let imgitem = getBodyData[1][0].gradientdefault;
-			if(getBodyData[1][0].profileimageurl != null && getBodyData[1][0].profileimageurl != "" && getBodyData[1][0].profileimageurl != undefined ) {
-				usingProfileimg = "true";
-				imgitem = getBodyData[1][0].profileimageurl;
+	if(req.query.category) {
+		let slug = req.query.category;
+		typeof functions.callFindPostsByCat(slug, function(results) {
+			if(results != "false") {
+				res.render('index', {title: "Daily Peel - Category's: " + slug, date: functions.getDate, username: getUser, posts: results});
+			} else {	
+				res.redirect("/404");
 			}
-			console.log(getBodyData[1]);
-			res.render('posts/single', { title: title.siteTitle + getMetaData[0].post_title, usingProfile: usingProfileimg, userImg: imgitem, getPostedDate: getMetaData[0].date, getDate: functions.getDate, postData: getMetaData, postBody: getBodyData[0][0].body.substring(1, getBodyData[0][0].body.length-1), postSlug: getBodyData[1][0].account_slug , postNickname: getBodyData[1][0].nickname ,username: getUser});
+		});
+	} else if(req.query.search) {
+		let slug = req.query.search;
+		typeof functions.callFindPostByTitle(slug, function(results) {
+			if(results != "false") {
+				res.render('index', {title: "Daily Peel - Search Result's: " + slug, date: functions.getDate, username: getUser, posts: results});
+			} else {	
+				res.redirect("/404");
+			}
+		});
+	} else {
+		let slug = req.originalUrl
+		slug = slug.split('/posts/')[1];
+		if(slug == "" || slug == null) {
+			let getUser;
+			if (req.session.loggedin) {
+				typeof functions.getSessionDetails(req, function(result) {
+					getUser = result;
+				});
+				typeof functions.callLoginMetaData(req, "check", "", function(result) {
+					if(result != "true") {
+						res.redirect('/logout');
+					} 
+				}); 
+			}
+			typeof functions.callFindPosts("home", "userAll", "", function(results) {
+				if(results != "false") {
+					res.render('index', {title: title.homeTitle, date: functions.getDate, username: getUser, posts: results});
+				} else {	
+					res.redirect("/404");
+				}
+			});
 		} else {
-			res.redirect("/404")
-		}
-	});			
+			typeof functions.callFindPosts(slug, "", "", function(getMetaData, getBodyData, resultIsValid) {
+				if(resultIsValid == "true") {
+					let usingProfileimg = "false";
+					let imgitem = getBodyData[1][0].gradientdefault;
+					if(getBodyData[1][0].profileimageurl != null && getBodyData[1][0].profileimageurl != "" && getBodyData[1][0].profileimageurl != undefined ) {
+						usingProfileimg = "true";
+						imgitem = getBodyData[1][0].profileimageurl;
+					}
+					console.log(getBodyData[1]);
+					res.render('posts/single', { title: title.siteTitle + getMetaData[0].post_title, usingProfile: usingProfileimg, userImg: imgitem, getPostedDate: getMetaData[0].date, getDate: functions.getDate, postData: getMetaData, postBody: getBodyData[0][0].body.substring(1, getBodyData[0][0].body.length-1), postSlug: getBodyData[1][0].account_slug , postNickname: getBodyData[1][0].nickname ,username: getUser});
+				} else {
+					res.redirect("/404")
+				}
+			});	
+		}	
+	}	
 });
 
 function getStringForItems() {

@@ -76,22 +76,41 @@ $(document).on({
 
 $(document).on({
     "click": function() {
-        if($(".active-editing-toggle").length > 0) {            
+        if ($(".active-editing-toggle").length > 0) {
+
             getUpdatedContent = $(this).parent().find('span').html();
-            if(getUpdatedContent != getOriginalContent) {
-                let getColumnTarget = $(this).parent().find('span').attr("data-is-name");
-                if($("#editable-block").length != 1) {
-                    $.post("/auth/ajax/updateusermeta", {columnTarget: getColumnTarget, data: getUpdatedContent}, function(data) {
-                        callToast(data[0], data[1], data[2]);
-                    });
-                }
-                $(this).parent().removeClass('active-editing-toggle');
-                $(this).parent().find('span').attr("contenteditable", "false");
-                $('#edit-toolbar').remove();
-                $('#saveToggle').remove();
-                $('#cancelToggle').remove();
+            let isPostTitle = $(this).parent().attr("id");
+            let $parent = $(this).parent(); // cache for reuse
+
+            const getUrl = window.location.href;
+
+            // If editing the post title, validate first and check if its not a new post
+            if (isPostTitle == "post-heading-title") {
+                const parseTitle = $('[data-is-name="post-title"]').text().trim();
+
+                $.post("/auth/ajax/checktitle", { postTitle: parseTitle }, (data) => {
+                    //check if data is returned if it returns true it means it found a post title with that specific heading
+                    if (data === true) {
+                        callToast("errormsg", "Whoops! Something's wrong.", "Sorry, looks like someone has already taken that post title.");
+                        return;
+                    }
+                    saveContent($parent);
+                });
+
+            } else if(isPostTitle == "category-tag") {
+                const parseCat = $('[data-is-name="category"]').text().trim();
+
+                $.post("/auth/ajax/checkcategory", { postCat: parseCat }, (data) => {
+                    //check if data is returned if it returns true it means it found a post title with that specific heading
+                    if (data === false) {
+                        callToast("infomsg", "Well ain't you fancy?", "Looks like this category doesnt exist, You will be creating a new category.");
+                    }
+                    saveContent($parent);
+                });
+            } else {
+                // Not a title → save immediately
+                saveContent($parent);
             }
-            $("#editable-block, .droptrue").sortable("enable");
         }
     }
 }, '#saveToggle');
@@ -147,9 +166,28 @@ $(document).on({
         const parseTitle = $('[data-is-name="post-title"]').text().trim(); //sanatise
         const parseCat = $('[data-is-name="category"]').text().trim();
         const parsePostThumb = $('#post-thumb-nail').attr("src");
-        $.post("/auth/ajax/publish", {postTitle: parseTitle, postCat: parseCat, postThumb: parsePostThumb, content: JSON.stringify(parseData)}, function(data) {
-            callToast(data[0], data[1], data[2]);
-        });
+        const getCurrentPublishedStatus = $(this).attr("data-is-published");
+        if(getCurrentPublishedStatus == false) {
+            $.post("/auth/ajax/checktitle", {postTitle: parseTitle}, function(data) {
+                const getUrl = window.location.href;
+
+                if(data == true && !getUrl.includes("edit")) {
+                    //title exists stop saving
+                    callToast("errormsg", "Whoops! Something's wrong.", "Sorry look's like someone has already taken that post title.");
+                    return;
+                } else {
+                    $.post("/auth/ajax/publish", {postTitle: parseTitle, postCat: parseCat, postThumb: parsePostThumb, content: JSON.stringify(parseData)}, function(data) {
+                        callToast(data[0], data[1], data[2]);
+                    });
+                    $('button[data-flow="publish"]').attr("data-is-published", "true");
+                }
+            });
+        } else {
+            $.post("/auth/ajax/publish", {postTitle: parseTitle, postCat: parseCat, postThumb: parsePostThumb, content: JSON.stringify(parseData)}, function(data) {
+                callToast(data[0], data[1], data[2]);
+            });
+            $('button[data-flow="publish"]').attr("data-is-published", "true");
+        }
     }
 }, 'button[data-flow="publish"]');
 
@@ -285,4 +323,29 @@ function sortableCall() {
         placeholder: "ui-state-content-highlight"
     });
 
+}
+
+function saveContent($parent) {
+
+    if (getUpdatedContent != getOriginalContent) {
+
+        let getColumnTarget = $parent.find('span').attr("data-is-name");
+
+        if ($("#editable-block").length != 1) {
+            $.post("/auth/ajax/updateusermeta", {
+                columnTarget: getColumnTarget,
+                data: getUpdatedContent
+            }, function(data) {
+                callToast(data[0], data[1], data[2]);
+            });
+        }
+
+        $parent.removeClass('active-editing-toggle');
+        $parent.find('span').attr("contenteditable", "false");
+        $('#edit-toolbar').remove();
+        $('#saveToggle').remove();
+        $('#cancelToggle').remove();
+    }
+
+    $("#editable-block, .droptrue").sortable("enable");
 }

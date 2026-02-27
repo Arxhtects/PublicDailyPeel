@@ -107,6 +107,21 @@ router.post('/ajax/setup', function(req, res) {
 
 });
 
+
+router.post('/ajax/checktitle', function(req, res) {
+	let getPostTitle = req.body.postTitle;
+	typeof functions.callCheckTitle(getPostTitle, function(result) {
+		res.send(result);
+	});
+});
+
+router.post('/ajax/checkcategory', function(req, res) {
+	let getCategoryName = req.body.postCat;
+	typeof functions.callCheckCatName(getCategoryName, function(result) {
+		res.send(result);
+	});
+});
+
 router.post('/ajax/publish', function(req, res) {
 	let setPostTitle = req.body.postTitle;
 	let setPostCategoy = req.body.postCat;

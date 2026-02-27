@@ -117,6 +117,58 @@ module.exports = {
             return false;
         }
     },
+    callCheckTitle: function(getPostTitle, callback) {
+        //console.log(getPostTitle);
+        const defineGetPostTitle = `SELECT * FROM posts WHERE post_title = ?`;
+        connection.query(defineGetPostTitle, [getPostTitle], function (error, results) {
+            if (error) throw error;
+            if (results.length === 0) {
+                return callback(false);
+            } else {
+                return callback(true);
+            }
+        });
+
+    },
+    callCheckCatName:  function(getCategoryName, callback) {
+        //console.log(getPostTitle);
+        const defineGetPostTitle = `SELECT * FROM posts WHERE post_category = ?`;
+        connection.query(defineGetPostTitle, [getCategoryName], function (error, results) {
+            if (error) throw error;
+            if (results.length === 0) {
+                return callback(false);
+            } else {
+                return callback(true);
+            }
+        });
+
+    },
+    callDeletePosts: function(metaid, targetToDelete, callback) {
+        const defineDeletePostType = `DELETE FROM posts WHERE post_slug = ? AND connected_user_meta = ?`
+        connection.query(defineDeletePostType, [targetToDelete, metaid], function(error, results) {
+            if (error) throw error;
+            //console.log(results);
+            if (results.affectedRows === 0) {
+                return callback(false);
+            } else {
+                return callback(true);
+            }
+        })
+    },
+    callFindPostByTitle: function(getPostName, callback) {
+        const sql = `SELECT * FROM posts WHERE post_title LIKE ?`;
+        const value = `%${getPostName}%`;
+        console.log(getPostName);
+        connection.query(sql, [value], function(error, results) {
+            if (error) throw error;
+
+            if (results.length === 0) {
+                return callback(false);
+            } else {
+                return callback(results);
+            }
+        });
+    },
     callSaveFunction: function(setPostTitle, setPostCategoy, setpostThumb, postContent, postMetaId, userMetaId, userSlug, callback){
         if (unsafeReg.test(postContent)) {
             setMessagetopass = [ "errormsg", "Unsafe elements have been added", setPostTitle + " could not be updated as unsafe elements are present in your post. Please remove them." ]
@@ -170,7 +222,7 @@ module.exports = {
 
                     const values = [
                         setPostTitle, setPostCategoy, postMetaId, userMetaId, setpostThumb, setPostSlug, userSlug, // First query
-                        postMetaId, userMetaId, JSON.stringify(postContent) 
+                        postMetaId, userMetaId, '"' + postContent + '"' 
                     ];
                     connection.query(setInsertQuery, values,  function(error, results, fields) {
                         if (error) throw error;	
@@ -182,6 +234,18 @@ module.exports = {
                     });
                 }
             });
+        }
+    },
+    callFindPostsByCat: function(slug, callback) {
+        if(slug != "" && slug != "undefined" && slug != null) {
+            //post_category
+            const getPostsByCat = `SELECT * FROM posts WHERE post_category = '${slug}' ORDER BY date DESC`;
+            connection.query(getPostsByCat,  function(error, results, fields) {
+                if (error) throw error;	
+                return callback(results); 
+            });
+        } else {
+            return callback("error", "no post exists", "false");
         }
     },
     callFindPosts: function(slug, type, target, callback) {

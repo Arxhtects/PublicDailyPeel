@@ -550,9 +550,21 @@
             background-color: $darkmodesearch;
         }
         figure {
+            position: relative;
             width: 100%;
             img {
                 width: 100%;
+            }
+            .deletepost {
+                border-radius: 50%;
+                height: 30px;
+                width: 30px;
+                background: $error;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                z-index: 2;
+                cursor: pointer;
             }
         }
         section {

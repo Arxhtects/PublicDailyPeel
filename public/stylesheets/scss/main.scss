@@ -244,6 +244,23 @@ em {
     }
 }
 
+.notice-wrapper {
+    width: 100%;
+    text-align: center;
+    h1, p {
+        margin-bottom: 20px;
+    }
+}
+
+.button-warp {
+    margin: 30px auto;
+    display: flex;
+    max-width: 220px;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+}
+
 @import "partials/login";
 @import "partials/menu";
 @import "partials/reusable";

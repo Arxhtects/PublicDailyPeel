@@ -16,6 +16,20 @@ block content
                         h4= item.post_title
                         
                         a.btn(href=`/posts/${item.post_slug}` data-post-number=index) Read Post
+            else
+                section.notice-wrapper
+                    h1.large-head Whoops, no matches. Sorry.
+                    p Maybe try again? Or try writing your own post's, so long as your a citizen in the jungle you can make a post to be approved by the council.
+                    .button-warp
+                        if(typeof(username) == 'undefined' || typeof(username) == "")
+                            a.btn(href="/sign-up", data-flow="sign-up-message", aria-label="Sign Up")
+                                span Sign Up
+                            a.btn(href="/login", data-flow="login-message-sign", data-has-message-sign="true", aria-label="log in with banstand")
+                                span Log in
+                        else 
+                            a.btn(href="/posts/create", data-notifcation-count="0", aria-label="Settings")
+                                span.write Write 
+                    
 
     footer
         include partials/footer

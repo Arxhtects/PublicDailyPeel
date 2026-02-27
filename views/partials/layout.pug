@@ -39,6 +39,13 @@ html
           span.msg= infomsg
           span.closebutton
 
+    if(typeof toastmsg !="undefined")
+        p(class=`toast ${toastmsg[0]} active`)
+          span.toast-head= toastmsg[1]
+          span.msg= toastmsg[2]
+          span.closebutton
+
+          
     header#header-main
       include menu
       

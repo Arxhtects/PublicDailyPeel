@@ -8,6 +8,42 @@ $(document).ready(function() {
     }
 
     setFooterHeight(getHeight);
+
+    $("#search-peel").on("click", function() {
+        let getSearchedParam = $("#search-input-item").val();
+        if(getSearchedParam != "") {
+            window.location.href = "/posts/?search=" + encodeURI(getSearchedParam);
+        } else {
+            callToast("infomsg", "I dont wana tell you what to do.", "But you should really put something in the search bar first.");
+            return false;
+        }
+    });
+
+    $("#search-input-item").keypress(function (e) {
+        const getInputKeyItem = e.which;
+        if(getInputKeyItem == 13) {
+            let getSearchedParam = $("#search-input-item").val();
+            if(getSearchedParam != "") {
+                window.location.href = "/posts/?search=" + encodeURI(getSearchedParam);
+            } else {
+                callToast("infomsg", "I dont wana tell you what to do.", "But you should really put something in the search bar first.");
+                return false;
+            }
+        }
+    });
+
+    $(".deletepost").on("click", function() {
+        const getTargetToDelete = $(this).attr("data-pass-slug");
+        window.location.href="/dashboard?delete=" + encodeURI(getTargetToDelete);
+    });
+
+    if($('span[data-is-name="category"]')) {
+        const getCurrentUrl = window.location.href;
+        if(!getCurrentUrl.includes("create") && !getCurrentUrl.includes("edit")) {
+            const getCategoryName = $('span[data-is-name="category"]').text()
+            $('span[data-is-name="category"]').wrap('<a href="/posts?category=' + getCategoryName + '" class="underline-animation"></a>');
+        }
+    }
     
     $("#search-target").on("click", function() {
         $("body").toggleClass('search-target');
