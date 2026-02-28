@@ -139,7 +139,6 @@ router.post('/sign-up', function(req, res, next) { //re-write this dreadful if n
 				if(!regex.test(getUser)) {
 					typeof functions.callUserExistsFunction(getUser, function(result) {
 						if(result == "false") {
-							if(banRegex.test(getBanaddress)) {
 								typeof functions.callBanExistsFunction(getBanaddress, function(result) {	
 									if(result == "false") {//TODO swap
 										let grdientGen;
@@ -174,9 +173,6 @@ router.post('/sign-up', function(req, res, next) { //re-write this dreadful if n
 										res.render('auth/sign-up', {"title" : title.registerTitle, "errormsg" : "Ban address already linked to account.", date: functions.getDate , authString: setAuthmessage, authUrl: signRequestLink });
 									}
 								},);
-							} else {
-								res.render('auth/sign-up', {"title" : title.registerTitle, "errormsg" : "Not a valid banano address.", date: functions.getDate , authString: setAuthmessage, authUrl: signRequestLink });
-							}
 						} else {
 							res.render('auth/sign-up', {"title" : title.registerTitle, "errormsg" : "Username already exists.", date: functions.getDate , authString: setAuthmessage, authUrl: signRequestLink });
 						}

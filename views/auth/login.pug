@@ -11,10 +11,26 @@ block content
                     p Sign-in with your banano wallet. Jump in to the discussion with your fellow monkeys! Read, comment and tip easily.
                     a.btn(href="./faqs", data-flow="help-message", aria-label="How to sign in") Need a little help?
                     a.underline-animation(href="./privacy-policy", aria-label="Privacy Policy") The Important Bits
-                    hr
 
-                div.form-wrapper#form-wrapper(data-type-order="2")
+                div.form-wrapper.form-scroll-item#form-wrapper(data-type-order="2")
+                    .form-navigation-wrapper 
+                        .next.nav-buttons
+                        .prev.nav-buttons
                     form#login(action="/login", method="post", data-flow="Log in form")
+                        div.input.form-items
+                            label(for="user") Username 
+                            input#user(name="user", aria-label="username input", type="text")
+
+                        div.input.form-items.password-type
+                            label(for="pin") Password 
+                            input#pin(name="pin", aria-label="signature response", type="password", data-flow="password-toggle")
+                            input.reveal(type="checkbox", aria-label="reveal-password", data-flow="show password")
+
+                        div.flex-row
+                            button.btn#submititem(data-flow="sign-in", aria-label="Sign in to daily peel") Sign in to daily peel
+                            a.underline-animation(href="./forgot-passowrd", aria-label="password reset", data-flow="") Forgot Pin
+                            
+                    form#login-auth(action="/login-auth", method="post", data-flow="Log in with ban form")
                         div
                             p Sign the following: 
                                 span#target-sig-to-sign 
@@ -33,30 +49,19 @@ block content
                             label(for="banaddress", aria-label="banano address") Address 
                             input#banaddress(name="banaddress", placeholder="ban_...", aria-label="banano address input", type="text")
 
-                        div.input.form-items
-                            label(for="user") Username 
-                            input#user(name="user", aria-label="username input", type="text")
-
-                        div.input.form-items.password-type
-                            label(for="pin") Password 
-                            input#pin(name="pin", aria-label="signature response", type="password", data-flow="password-toggle")
-                            input.reveal(type="checkbox", aria-label="reveal-password", data-flow="show password")
-
                         div.flex-row
-                            button.btn#submititem(data-flow="sign-in", aria-label="Sign in to daily peel") Sign in to daily peel
-                            a.underline-animation(href="./forgot-passowrd", aria-label="password reset", data-flow="") Forgot Pin
+                            button.btn#submititem(data-flow="sign-in", aria-label="Sign in with Auth") Sign in with Auth
+                //- div.bottom-item(data-type-order="3")
+                //-     wrapper#carousel-wrapper 
+                //-         article.review
+                //-             i.quote 
+                //-             blockquote The most fun you can legally have on the internet. I didn't even get paid to say that. Seriously. Still not paid me.
+                //-             .user 
+                //-                 figure.user-wrapper 
 
-                div.bottom-item(data-type-order="3")
-                    wrapper#carousel-wrapper 
-                        article.review
-                            i.quote 
-                            blockquote The most fun you can legally have on the internet. I didn't even get paid to say that. Seriously. Still not paid me.
-                            .user 
-                                figure.user-wrapper 
-
-                                div.name
-                                    strong Bananochan 
-                                    span Cute anime girl
+                //-                 div.name
+                //-                     strong Bananochan 
+                //-                     span Cute anime girl
 
     footer
         include ../partials/footer

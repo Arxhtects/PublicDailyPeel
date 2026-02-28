@@ -9,6 +9,10 @@ $(document).ready(function() {
 
     setFooterHeight(getHeight);
 
+    $(".nav-buttons").on("click", function() {
+        $(this).parent().parent().toggleClass("toggle-auth");
+    });
+ 
     $("#search-peel").on("click", function() {
         let getSearchedParam = $("#search-input-item").val();
         if(getSearchedParam != "") {

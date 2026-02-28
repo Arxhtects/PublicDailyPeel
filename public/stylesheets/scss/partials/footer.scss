@@ -2,7 +2,7 @@ footer {
     position: relative;
     section[data-flow="paralax-scroll-animation-notifier"] {
         display: none;
-        @media only screen and (min-width: $mobile-smaller) {
+        @media only screen and (min-width: $mobile) {
             position: fixed;  
             display: block;
             width: 100%;
