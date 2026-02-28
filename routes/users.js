@@ -66,7 +66,7 @@ router.get('/*', function(req, res, next) {
 	typeof functions.callGetUserDetails(slug, function(results, resultIsValid) {
 		let getUserData = results;
 		if(resultIsValid == "true") {
-			typeof functions.callFindPosts(slug, "userAll", "all", function(results) {
+			typeof functions.callFindPosts(slug, "userAll", "user", function(results) {
 				if(results != "false") {
 					console.log(results);
 					res.render('users/userpage', { title: title.siteTitle + "" + slug, getDate: functions.getDate, details: getUserData, userPosts: results});
