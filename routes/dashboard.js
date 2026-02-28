@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
 						} else {
 							setMessagetopass = [ "successmsg", "Phew. That worked as intended.", "Your post has been sucessfully removed!" ]
 						}
-						typeof functions.callFindPosts(getUser[7], "userAll", "all", function(results) {
+						typeof functions.callFindPosts(getUser[7], "userAll", "user", function(results) {
 							if(results != "false") {
 								//console.log(results);
 								res.render('dashboard/home', { title: title.dashboardHome, getDate: functions.getDate, username: getUser, posts: results, toastmsg: setMessagetopass});
@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
 						});
 					});
 				} else {
-					typeof functions.callFindPosts(getUser[7], "userAll", "all", function(results) {
+					typeof functions.callFindPosts(getUser[7], "userAll", "user", function(results) {
 						if(results != "false") {
 							//console.log(results);
 							res.render('dashboard/home', { title: title.dashboardHome, getDate: functions.getDate, username: getUser, posts: results});
@@ -53,3 +53,4 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+
