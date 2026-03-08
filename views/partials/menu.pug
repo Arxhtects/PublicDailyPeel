@@ -41,12 +41,18 @@ header#header-main
                             li.write-icon
                                 a.underline-animation(href="/posts/create", data-notifcation-count="0", aria-label="Settings")
                                     span.write Write 
-                            li.hiddendesktop.notifcation-icon
-                                a.underline-animation(href="/users/notifications", data-notifcation-count="0",  aria-label="Notifications")
-                                    span.notifications Notifications
+                            //- li.hiddendesktop.notifcation-icon
+                            //-     a.underline-animation(href="/users/notifications", data-notifcation-count="0",  aria-label="Notifications")
+                            //-         span.notifications Notifications
                             li.dashboard-icon
                                 a.underline-animation(href="/dashboard", data-notifcation-count="0", aria-label="Dashboard")
                                     span.dashboard Dashboard
+
+                            if username[8] && username[8].length > 0 && (username[8].map(u => u.id).includes('999') || username[8].map(u => u.id).includes('840979414299967518'))
+                                li.review-icon
+                                    a.underline-animation(href="/dashboard/review", data-notifcation-count="0", aria-label="review")
+                                        span.review Review  
+
                             li.profile-icon
                                 a.underline-animation(href="/users/profile", data-notifcation-count="0", aria-label="Profile")
                                     span.profile Profile  

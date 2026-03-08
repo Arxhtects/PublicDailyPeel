@@ -26,13 +26,23 @@ module.exports = {
     getSessionDetails: function(req, callback) {
         let getUser = [];
 		getUser[0] = req.session.username;
-		getUser[1] = req.session.metaid; //TODO
+		getUser[1] = req.session.metaid;
 		getUser[2] = req.session.hasprofileimage;
 		getUser[3] = req.session.gradientdefault;
 		getUser[4] = req.session.profileimageurl;
 		getUser[5] = req.session.nickname;
         getUser[6] = req.session.loginHash;
         getUser[7] = req.session.slug;
+        if (req.session.jobs) {
+            try {
+                getUser[8] = JSON.parse(req.session.jobs);
+            } catch (e) {
+                console.error("Invalid JSON in session.jobs:", e);
+                getUser[8] = ""; 
+            }
+        } else {
+            getUser[8] = ""; // Use single "=" for assignment
+        }
 
         return callback(getUser);
     },
@@ -322,7 +332,7 @@ module.exports = {
         }
     },
     callGetUserDetails: function(param, callback) {
-        const defineCheckQuery = `SELECT profileimageurl, gradientdefault, nickname, role, blurb FROM accounts_meta WHERE account_slug = '${param}'`;
+        const defineCheckQuery = `SELECT profileimageurl, gradientdefault, nickname, role, blurb, jobs FROM accounts_meta WHERE account_slug = '${param}'`;
         connection.query(defineCheckQuery,  function(error, results, fields) {
             if (error) throw error;	
             if (results.length == 1) {

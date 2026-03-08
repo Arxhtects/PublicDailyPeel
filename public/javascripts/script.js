@@ -38,7 +38,10 @@ $(document).ready(function() {
 
     $(".deletepost").on("click", function() {
         const getTargetToDelete = $(this).attr("data-pass-slug");
-        window.location.href="/dashboard?delete=" + encodeURI(getTargetToDelete);
+        const getTitleName = $(this).attr("data-pass-title");
+        callActionToast("infomsg", "Are you sure?", "Your trying to delete: \"" + getTitleName + "\", do you want to continue with this?", "", getTargetToDelete);
+
+        //window.location.href="/dashboard?delete=" + encodeURI(getTargetToDelete);
     });
 
     if($('span[data-is-name="category"]')) {
@@ -153,6 +156,19 @@ $(document).ready(function() {
 
 });
 
+$(document).on({
+    "click": function() {
+        const getTargetToDelete = $(this).attr("data-pass-target");
+        window.location.href="/dashboard?delete=" + encodeURI(getTargetToDelete);
+    }
+}, '.agreeButton');
+
+$(document).on({
+    "click": function() {
+        $(".toast").removeClass("active");
+    }
+}, '.declineBUtton');
+
 function setFooterHeight(param) {
     $('section[data-flow="paralax-scroll-animation-notifier"]').css("padding-top", param);
 }
@@ -185,4 +201,44 @@ function callToast(type, title, message) { //stole from my stager app whic is re
     setTimeout(function() {
         toast.remove();
     }, 2000);
+}
+
+function callActionToast(type, title, message, buttons, datatarget) { //stole from my stager app whic is react.js and all pure vanilla js 
+    const toast = document.createElement('div');
+    toast.className = type + ' toast active';
+
+    const toastHead = document.createElement('span');
+    toastHead.className = 'toast-head';
+    toastHead.textContent = title;
+    toast.appendChild(toastHead);
+
+    const msg = document.createElement('span');
+    msg.className = 'msg';
+    msg.textContent = message;
+    toast.appendChild(msg);
+
+    const closeButton = document.createElement('span');
+    closeButton.className = 'closebutton';
+    toast.appendChild(closeButton);
+    
+    
+    const buttonWrapperItem = document.createElement('div');
+    buttonWrapperItem.className = 'toast-button-wrap-item';
+    toast.appendChild(buttonWrapperItem);
+
+    const agreeButton = document.createElement('span');
+    agreeButton.className = 'agreeButton';
+    agreeButton.setAttribute("data-pass-target", datatarget);
+    buttonWrapperItem.appendChild(agreeButton);
+    
+    const declineBUtton = document.createElement('span');
+    declineBUtton.className = 'declineBUtton';
+    buttonWrapperItem.appendChild(declineBUtton);
+
+    document.body.appendChild(toast);
+
+    closeButton.addEventListener('click', function() {
+        toast.remove();
+    });
+
 }

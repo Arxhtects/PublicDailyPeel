@@ -18,6 +18,12 @@ block content
                     span(contenteditable="false", data-is-name="role") !{details[0]}
                 h1#username(data-flow="is-editable", data-meta="ajax-username-updateable", data-allows-editor="false") 
                     span(contenteditable="false", data-is-name="nickname") !{username[5]}
+                   
+                if(typeof(username[8]) != "undefined")
+                    section#role-wrapper(data-flow="role-box")
+                        each role in username[8]
+                            div(class=role.name.replace(/ /g, '-') data-id=`${role.id}` data-title=`${role.name}`) #{role.name}
+
                 p#blub(data-flow="is-editable", data-meta="ajax-updateable", data-allows-editor="true") 
                     span(contenteditable="false", data-is-name="blurb") !{details[1]}
 
@@ -25,12 +31,28 @@ block content
                     p Follow: 
                     div.additional +
         
+        
+        section.padded-top.padded-bottom.row
+            p.h2 Change Ban Address
+
+        section.padded-bottom.row
+            p.h2 Discord Link
+
+            if(typeof(username[8]) == "undefined")
+                a.btn.discord-role(href="https://discord.com/oauth2/authorize?client_id=1479557521856528475&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fdiscord&scope=identify+guilds+guilds.members.read" data-flow="connect-discord")
+                    span Get Your Discord Roles
+            else
+                p You already have linked your discord, if your missing any roles, try refreshing.
+
+                a.btn.discord-role(href="https://discord.com/oauth2/authorize?client_id=1479557521856528475&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fdiscord&scope=identify+guilds+guilds.members.read" data-flow="connect-discord")
+                    span Refresh Your Discord Roles
+
         hr
 
         section.padded-top.row
             p.h2 Change Password
             
-            section#login-head.padded 
+            section.padded 
                 form#login(action="", data-flow="sign up form")
                     div.input.form-items.password-type
                         label(for="currentpass", aria-label="current password") Current Password 
@@ -48,12 +70,6 @@ block content
                         input.reveal(type="checkbox", aria-label="reveal-password", data-flow="show password")
  
                     button.btn#resetpassword(data-flow="resetpassword", aria-label="Reset Password") Reset Password
-
-        section.padded-top.padded-bottom.row
-            p.h2 Change Ban Address
-
-        section.padded-top.padded-bottom.row
-            p.h2 Discord Link
 
     footer
         include ../partials/footer

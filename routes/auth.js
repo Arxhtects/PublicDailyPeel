@@ -7,6 +7,7 @@ let getCryptographicstring = cryptoRandomString.randomBytes(64).toString('base64
 
 const connection = require('./db');
 const functions = require('./functions');
+const { setClientId, setClientSecret, setRoleArray } = require('./discordauth');
 
 router.post('/ajax/passwordreset', function(req, res) {
 	let getNewParam = req.body.newpass;
@@ -144,6 +145,89 @@ router.post('/ajax/publish', function(req, res) {
 		}
 	}); 
 	
+});
+
+router.get('/discord', async (req, res) => {
+    const code = req.query.code;
+
+    if (!code) {
+        return res.send("No code returned from Discord");
+    }
+
+	const discordAuth2Param = new URLSearchParams({
+		client_id: setClientId, //TODO Make process.env
+		client_secret: setClientSecret,
+		grant_type: 'authorization_code',
+		code,
+		redirect_uri: 'http://localhost:3000/auth/discord'
+	});
+
+    const tokenResponse = await fetch('https://discord.com/api/oauth2/token', {
+        method: 'POST',
+        body: discordAuth2Param,
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    });
+
+
+    const tokenData = await tokenResponse.json();
+    console.log("Token Data:", tokenData);
+
+    req.session.discordAccessToken = tokenData.access_token;
+
+    res.redirect('/auth/discord/result');
+});
+
+router.get('/discord/result', async (req, res) => {
+    const accessToken = req.session.discordAccessToken;
+
+    if (!accessToken) {
+        return res.send("No access token in session");
+    }
+
+    const guildId = '415935345075421194';
+
+    const response = await fetch(
+        `https://discord.com/api/users/@me/guilds/${guildId}/member`,
+        {
+            headers: { 'Authorization': `Bearer ${accessToken}` }
+        }
+    );
+	
+    const data = await response.json();
+
+	if(data != null) {
+		const userRolesId = data.roles;
+
+		const matchedRoles = setRoleArray.filter(role =>
+			userRolesId.includes(role.id)
+		);
+
+		console.log(data);
+		console.log(userRolesId);
+
+		console.log(matchedRoles);
+
+		const getMatchedRoles = JSON.stringify(matchedRoles);
+
+		typeof functions.getSessionDetails(req, function(result) {
+			getUser = result;
+		});
+
+		const updateRoles = `UPDATE accounts_meta SET jobs = '${getMatchedRoles}' WHERE metaid = '${getUser[1]}'`;
+		
+        connection.query(updateRoles,  function(error, results, fields) {
+            if (error) throw error;	
+			console.log(results.changedRows);
+            if (results.changedRows == 1) {
+                res.send("Success");
+            } else {
+                res.send("Failed");
+            }
+        });
+	} else {
+		res.send("No data retrived");
+	}
+
 });
 
 router.get('/auth', function(req, res) {

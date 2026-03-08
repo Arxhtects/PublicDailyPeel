@@ -44,6 +44,7 @@ router.get('/profile', function(req, res, next) {
 			if (results.length > 0) {
 				getProfileDetails[0] = results[0].role;
 				getProfileDetails[1] = results[0].blurb;
+				console.log(getUser[8]);
 				res.render('users/profile', { title: title.dashboardHome, getDate: functions.getDate, username: getUser, details: getProfileDetails});
 			} else {
 				res.render('users/profile', { title: title.dashboardHome,"errormsg" : "Unable to collect user data",  getDate: functions.getDate, username: getUser, details: getProfileDetails});
@@ -62,14 +63,25 @@ router.get('/*', function(req, res, next) {
 		});
 	}
 	let slug = req.originalUrl
+	let collectjobroles;
 	slug = slug.split('/users/')[1];
 	typeof functions.callGetUserDetails(slug, function(results, resultIsValid) {
 		let getUserData = results;
 		if(resultIsValid == "true") {
 			typeof functions.callFindPosts(slug, "userAll", "user", function(results) {
 				if(results != "false") {
-					console.log(results);
-					res.render('users/userpage', { title: title.siteTitle + "" + slug, getDate: functions.getDate, details: getUserData, userPosts: results});
+					const setJobRoles = getUserData[0].jobs;
+					if (setJobRoles) {
+						try {
+							collectjobroles = JSON.parse(setJobRoles);
+						} catch (e) {
+							console.error("Invalid JSON in session.jobs:", e);
+							collectjobroles = ""; 
+						}
+					} else {
+						collectjobroles = ""; // Use single "=" for assignment
+					}
+					res.render('users/userpage', { title: title.siteTitle + "" + slug, getDate: functions.getDate, details: getUserData, jobs: collectjobroles, userPosts: results, username: getUser});
 				} else {	
 					res.redirect("/404")
 				}

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="362" height="271.453" viewBox="0 0 362 271.453">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="362" height="141" transform="translate(-3 114.082)" fill="#fff"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect id="Rectangle_3" data-name="Rectangle 3" width="362" height="54" transform="translate(-3 201.082)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Group_3" data-name="Group 3" transform="translate(3 0.453)">
+    <g id="Mask_Group_1" data-name="Mask Group 1" transform="translate(0 15.918)" clip-path="url(#clip-path)">
+      <g id="Path_1" data-name="Path 1" transform="translate(81 47.477)" fill="none">
+        <path d="M179.025-5.117,166,168.949c0,15.758-13.879,28.533-31,28.533H31c-17.121,0-31-12.775-31-28.533L-14.448-5.117Z" stroke="none"/>
+        <path d="M 5.107894897460938 12.88265991210938 L 18.00001525878906 168.2028961181641 L 18.00001525878906 168.9486236572266 C 18.00001525878906 174.6579895019531 23.95329284667969 179.4813995361328 31.00001525878906 179.4813995361328 L 135.0000152587891 179.4813995361328 C 142.0467376708984 179.4813995361328 148.0000152587891 174.6579895019531 148.0000152587891 168.9486236572266 L 148.0000152587891 168.276123046875 L 159.6279449462891 12.88265991210938 L 5.107894897460938 12.88265991210938 M -14.44807434082031 -5.117340087890625 L 179.0251922607422 -5.117340087890625 L 166.0000152587891 168.9486236572266 C 166.0000152587891 184.7068481445312 152.1208343505859 197.4813995361328 135.0000152587891 197.4813995361328 L 31.00001525878906 197.4813995361328 C 13.879150390625 197.4813995361328 1.52587890625e-05 184.7068481445312 1.52587890625e-05 168.9486236572266 L -14.44807434082031 -5.117340087890625 Z" stroke="none" fill="#0f1"/>
+      </g>
+    </g>
+    <line id="Line_1" data-name="Line 1" x2="12" y2="152" transform="translate(77.5 80.5)" fill="none" stroke="#0f1" stroke-linecap="round" stroke-width="18"/>
+    <line id="Line_2" data-name="Line 2" x1="1" y2="12" transform="translate(248.5 80.5)" fill="none" stroke="#0f1" stroke-linecap="round" stroke-width="18"/>
+    <line id="Line_3" data-name="Line 3" x2="52" transform="translate(59.5 53.5)" fill="none" stroke="#0f1" stroke-linecap="round" stroke-width="18"/>
+    <line id="Line_4" data-name="Line 4" x2="119" transform="translate(149.5 53.5)" fill="none" stroke="#0f1" stroke-linecap="round" stroke-width="18"/>
+    <line id="Line_5" data-name="Line 5" x2="66" transform="translate(131 11.5)" fill="none" stroke="#0f1" stroke-linecap="round" stroke-width="18"/>
+    <line id="Line_6" data-name="Line 6" y1="42" x2="19.5" transform="translate(111.5 11.5)" fill="none" stroke="#0f1" stroke-linecap="round" stroke-width="18"/>
+    <line id="Line_7" data-name="Line 7" x1="17" y1="38" transform="translate(197.5 11.5)" fill="none" stroke="#0f1" stroke-linecap="round" stroke-width="18"/>
+    <line id="Line_8" data-name="Line 8" x1="1" y2="12" transform="translate(245.5 122)" fill="none" stroke="#0f1" stroke-linecap="round" stroke-width="18"/>
+    <line id="Line_9" data-name="Line 9" x2="6" y2="78" transform="translate(118.5 122.5)" fill="none" stroke="#0f1" stroke-linecap="round" stroke-width="18"/>
+  </g>
+</svg>

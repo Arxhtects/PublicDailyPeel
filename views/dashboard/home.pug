@@ -8,7 +8,7 @@ block content
                     each item, index in posts
                         article.post-item 
                             figure 
-                                .deletepost(data-type="delete" data-pass-slug=`${item.post_slug}`)
+                                .deletepost(data-type="delete" data-pass-slug=`${item.post_slug}` data-pass-title=`${item.post_title}`)
                                 a(href=`/posts/edit?post=${item.post_slug}` data-post-number=index)
                                     img(src=item.post_thumbnail, alt=item.post_title)
                             section

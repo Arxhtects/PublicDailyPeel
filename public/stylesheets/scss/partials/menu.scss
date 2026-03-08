@@ -45,6 +45,7 @@ header {
             width: 40px;
             height: 40px;
             left: 20px;
+            z-index: 30;
             @media only screen and (min-width: $mobile) {
                 margin-top: 11px;
             }

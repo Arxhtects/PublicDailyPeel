@@ -71,7 +71,9 @@
             right: -30px;
             background: $error;
             &:after {
-                background-image: url("../images/svg/edit.svg");
+                background-image: url("../images/svg/trashbin.svg");
+                height: 30px;
+                width: 30px;
             }
         }
     }

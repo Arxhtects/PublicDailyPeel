@@ -186,6 +186,35 @@
             }
         }
     }
+    &.discord-role {
+        position: relative;
+        padding-left: 60px;
+        margin-top: 20px;
+        display: inline-block;
+        &:before {
+            content: '';
+            transition: $transition;
+            background-image: url(../images/svg/discord.svg);
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            height: 30px;
+            width: 30px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50%;
+            filter: brightness(0) invert(0);
+        }
+        &:hover {
+            &:before {
+                filter: brightness(0) invert(0);
+                @media (prefers-color-scheme: dark) {
+                    filter: brightness(0) invert(1);
+                }
+            }
+        }
+    }
 }
 
 .flex-row {
@@ -324,7 +353,7 @@
             }
         }
         h1 {
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             font-size: clamp(3rem, calc(1.306vw + 1.694rem), 4rem);
         }
         .social-wrapper {
@@ -557,14 +586,32 @@
             }
             .deletepost {
                 border-radius: 50%;
-                height: 30px;
-                width: 30px;
+                height: 40px;
+                width: 40px;
                 background: $error;
                 position: absolute;
                 top: 10px;
                 right: 10px;
                 z-index: 2;
                 cursor: pointer;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: 50%;  
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    height: 28px;
+                    width: 28px;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: 50%;
+                    background-image: url("../images/svg/trashbin.svg");
+                    filter: brightness(0) invert(0);
+                    margin: 1px 0px 0px 1px;           
+                    @media only screen and (min-width: $mobile) {
+                        transition: $transition;
+                    }
+                }
             }
         }
         section {
@@ -583,6 +630,7 @@
             .box-wrap {
                 display: flex;
                 flex-flow: column;
+                margin-bottom: 10px;
                 @media only screen and (min-width: $mobile) {
                     flex-flow: row;
                     justify-content: space-between;
@@ -593,17 +641,108 @@
                     font-size: 12px;
                     padding: 5px 15px;
                     border-radius: 50px;
-                    background: $lightmodeHR;
+                    background: white;
+                    border: solid 1px #e8e8e8;
                     margin-bottom: 30px;
                     width: max-content;
                     @media (prefers-color-scheme: dark) {
                         background: $darkmodeHR;
+                        border: solid 0px black;
                     }    
                     @media only screen and (min-width: $mobile) {
                         order: 2;
                         margin-bottom: 0px;
                     }
                 }
+            }
+        }
+    }
+}
+
+#role-wrapper {
+    display: flex;
+    flex-flow: row;
+    justify-content: start;
+    gap: 10px;
+    margin-bottom: 20px;
+    div {
+        height: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: max-content;
+        padding: 5px;
+        border-radius: 50px;
+        font-weight: 300;
+        font-family: $bodyFont;
+        font-size: .8em;
+        color: black;
+        background-color: $lightmodesearch;
+        @media (prefers-color-scheme: dark) {
+            background-color: $darkmodesearch;
+            color: white;
+            border: solid 1px black;
+        }
+        &:before {
+            content: '';
+            height: 15px;
+            width: 15px;
+            margin-right: 10px;
+            border-radius: 50px;
+        }
+        &.Citizen {
+            &:before {
+                background: #21793b;
+            }
+        }
+        &.Fanta {
+            &:before {
+                background: #f3bba8;
+            }
+        }
+        &.BRCPD {
+            &:before {
+                background: #3395d7;
+            }
+        }
+        &.Council {
+            &:before {
+                background: #f5d50a;
+            }
+        }
+        &.Cuck {
+            &:before {
+                background: #ff0006;
+            }
+        }    
+        &.Relic {
+            &:before {
+                background: #311b02;
+            }
+        }
+        &.Nodes {
+            &:before {
+                background: #2ecc71;
+            }
+        }
+        &.Community-Manager {
+            &:before {
+                background: #e67e22;
+            }
+        }
+        &.Jungle-Junta {
+            &:before {
+                background: #f5d50a;
+            }
+        }
+        &.hng {
+            &:before {
+                background: #f5d50a;
+            }
+        }
+        &.Daily-Peel-Admin {
+            &:before {
+                background: #f5d50a;
             }
         }
     }

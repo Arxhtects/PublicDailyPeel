@@ -77,7 +77,7 @@ router.post('/login', function(req, res) {
 						req.session.username = getUser;
 						req.session.hasprofileimage = results[0].hasprofileimage;
 						req.session.metaid = results[0].metaid;
-						connection.query(`SELECT profileimageurl, gradientdefault, nickname, account_slug FROM accounts_meta WHERE metaid = '${getMetaId}'`,  function(error, results, fields) {
+						connection.query(`SELECT profileimageurl, gradientdefault, nickname, account_slug, jobs FROM accounts_meta WHERE metaid = '${getMetaId}'`,  function(error, results, fields) {
 							if (error) throw error;
 							if (results.length > 0) {
 								let newhash = getCryptographicstring;
@@ -86,6 +86,7 @@ router.post('/login', function(req, res) {
 								req.session.profileimageurl = results[0].profileimageurl;
 								req.session.nickname = results[0].nickname;
 								req.session.slug = results[0].account_slug;
+								req.session.jobs = results[0].jobs;
 								typeof functions.callLoginMetaData(req, "change", newhash, function(result) {
 									console.log(result);
 									if(result == "true") {
